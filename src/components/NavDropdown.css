@@ -1,0 +1,137 @@
+/* Navigation Dropdown Styles - Matching Figma Design */
+
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-trigger {
+  background: none;
+  border: none;
+  color: var(--black);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  position: relative;
+  text-decoration: none;
+  display: block;
+}
+
+.nav-dropdown-trigger:hover {
+  color: var(--water-blue);
+}
+
+.nav-dropdown-trigger.active {
+  color: var(--water-blue);
+  font-weight: 600;
+}
+
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--water-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-dropdown-trigger:hover::after,
+.nav-dropdown-trigger.active::after {
+  width: 100%;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--neutral-300);
+  border-radius: 6px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  min-width: 200px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  animation: navDropdownSlideIn 0.2s ease-out;
+}
+
+.nav-dropdown-item {
+  display: block;
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.nav-dropdown-link:hover {
+  background: var(--secondary-cream);
+  color: var(--primary-navy);
+  padding-left: 1.25rem;
+}
+
+.nav-dropdown-item:last-child .nav-dropdown-link {
+  border-bottom: none;
+}
+
+/* Animation for dropdown menu */
+@keyframes navDropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav-dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-top: 1px solid var(--neutral-300);
+    border-radius: 0;
+    margin-top: 0;
+    background: var(--neutral-50);
+    animation: none;
+  }
+  
+  .nav-dropdown-link {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--neutral-200);
+  }
+  
+  .nav-dropdown-link:hover {
+    background: var(--neutral-100);
+    padding-left: 1.5rem;
+  }
+  
+  .nav-dropdown-item:last-child .nav-dropdown-link {
+    border-bottom: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.nav-dropdown-trigger:focus {
+  outline: 2px solid var(--water-blue);
+  outline-offset: 2px;
+}
+
+.nav-dropdown-link:focus {
+  outline: 2px solid var(--water-blue);
+  outline-offset: -2px;
+}
