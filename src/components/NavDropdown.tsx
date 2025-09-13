@@ -22,7 +22,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
   className = ""
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
 
@@ -40,28 +39,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
     }
   }, [])
 
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout)
-      }
-    }
-  }, [hoverTimeout])
 
   const handleMouseEnter = () => {
-    // if (hoverTimeout) {
-    //   clearTimeout(hoverTimeout)
-    //   setHoverTimeout(null)
-    // }
     setIsOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    // const timeout = setTimeout(() => {
-      setIsOpen(false)
-    // }, 200) // Increased delay to prevent flickering
-    // setHoverTimeout(timeout)
   }
 
   const handleItemClick = (item: NavDropdownItem) => {
