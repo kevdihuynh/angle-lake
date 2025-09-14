@@ -9,6 +9,11 @@
   margin-top: 80px; /* Account for fixed header */
 }
 
+/* Scroll offset for anchor links to account for fixed header */
+section[id] {
+  scroll-margin-top: 100px; /* Extra space above sections for anchor links */
+}
+
 /* Hero Section */
 .hero-section {
   position: relative;
@@ -33,37 +38,41 @@
 
 .important-message {
   background: white;
-  border: 2px solid #e53e3e;
+  border: none;
   border-radius: 8px;
-  padding: 2rem;
-  max-width: 500px;
+  padding: 3rem;
+  max-width: 600px;
+  margin: 0 auto;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: none;
 }
 
 .message-icon {
   background: #e53e3e;
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 1.2rem;
-  margin: 0 auto 1rem;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
 }
 
 .important-message h3 {
-  color: #1a202c;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .important-message p {
-  color: #4a5568;
-  line-height: 1.6;
+  color: #000;
+  line-height: 1.5;
+  margin: 0.75rem 0;
+  font-size: 1.2rem;
 }
 
 /* Section Styles */
@@ -234,6 +243,54 @@
   margin: 0;
   color: #718096;
   font-size: 0.9rem;
+}
+
+/* Document Selector Styles */
+.document-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.selector-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selector-tab {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #4a5568;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.selector-tab:hover {
+  background: #f7fafc;
+}
+
+.selector-tab.active {
+  background: #3182ce;
+  color: white;
+  border-color: #3182ce;
+}
+
+.tab-indicator {
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #3182ce;
+  border-radius: 50%;
 }
 
 /* PDF Viewer Section */
@@ -781,7 +838,7 @@
 }
 
 .legal-content {
-  max-width: 1000px;
+  max-width: none;
 }
 
 .legal-subsection {
@@ -975,6 +1032,28 @@
   font-size: 0.9rem;
 }
 
+/* Video Indicator */
+.video-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.album-thumbnail {
+  position: relative;
+}
+
 
 .viewing-selector {
   display: flex;
@@ -1039,6 +1118,16 @@
   
   .search-bar {
     max-width: 100%;
+  }
+  
+  .document-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .selector-tabs {
+    flex-wrap: wrap;
   }
   
   .pdf-header {

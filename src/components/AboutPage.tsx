@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import './Header.css'
 import './Footer.css'
 
 const AboutPage: React.FC = () => {
+  const [selectedCovenant, setSelectedCovenant] = useState('snively-tracts')
+
+  const covenantOptions = [
+    { value: 'snively-tracts', label: 'Covenants - Snively\'s Angle Lake Tracts', url: 'https://anglelakemanor.com/ALMNovember2010Covenants.pdf' },
+    { value: 'petition-signatures', label: 'ALM Covenants - ALM Petition Signatures for Version', url: 'https://anglelakemanor.com/PetitionSignaturesRevisions.pdf' },
+    { value: 'wa-state-bar', label: '2004 WA State Bar Assoc. CC&R Guidelines', url: 'https://anglelakemanor.com/ALM%20Law%20Assn%20CCR%20numbered.pdf' }
+  ]
   const clubOfficers = [
     {
       title: 'Treasurer',
@@ -72,54 +79,78 @@ const AboutPage: React.FC = () => {
             <div className="legal-content">
               <div className="legal-subsection">
                 <h3>COVENANTS</h3>
-                <div className="document-viewer">
-                  <div className="document-header">
-                    <h4>WASHINGTON STATE RECORDER'S Cover Sheet</h4>
-                    <div className="document-controls">
-                      <button>🔍</button>
-                      <button>⬇️</button>
-                      <button>🖨️</button>
-                      <button>⛶</button>
-                    </div>
+                
+                {/* Document Selector */}
+                <div className="viewing-selector">
+                  <span>Viewing</span>
+                  <select 
+                    value={selectedCovenant} 
+                    onChange={(e) => setSelectedCovenant(e.target.value)}
+                    className="dropdown"
+                  >
+                    {covenantOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="newsletter-title">ALM Covenants</span>
+                </div>
+
+                {/* PDF Viewer */}
+                <div className="pdf-viewer">
+                  <div className="pdf-header">
+                    <h4>{covenantOptions.find(opt => opt.value === selectedCovenant)?.label}</h4>
                   </div>
-                  <div className="document-content">
-                    <p><strong>Return Address:</strong> Scott H... 17208 30th Ave S Seattle, WA 98188</p>
-                    <div className="barcode">20120827000664</div>
-                    <p><strong>RECORDS, B&M MISC PAGE 1 OF 009 08/27/2012 11:18 KING COUNTY, WA</strong></p>
-                    <p>Please print or type information WASHINGTON STATE RECORDER'S Cover Sheet (RCW 65.04)</p>
-                    <p><strong>Document Title(s) (or transactions contained therein):</strong></p>
+                  <div className="pdf-embed-container">
+                    <iframe
+                      src={`${covenantOptions.find(opt => opt.value === selectedCovenant)?.url}#toolbar=1&navpanes=1&scrollbar=1`}
+                      width="100%"
+                      height="600px"
+                      title="ALM Covenants"
+                      className="pdf-iframe"
+                    />
                   </div>
                 </div>
+                
                 <div className="section-button">
-                  <button className="btn btn-primary">DOWNLOAD CONVENANTS</button>
+                  <a 
+                    href={covenantOptions.find(opt => opt.value === selectedCovenant)?.url}
+                    download={`${covenantOptions.find(opt => opt.value === selectedCovenant)?.label.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`}
+                    className="btn btn-primary"
+                  >
+                    DOWNLOAD COVENANTS
+                  </a>
                 </div>
               </div>
 
               <div className="legal-subsection">
                 <h3>BYLAWS</h3>
-                <div className="document-viewer">
-                  <div className="document-header">
-                    <h4>ANGLE LAKE MANOR COMMUNITY CLUB BYLAWS</h4>
-                    <div className="document-controls">
-                      <button>🔍</button>
-                      <button>⬇️</button>
-                      <button>🖨️</button>
-                      <button>⛶</button>
-                    </div>
+                
+                {/* PDF Viewer */}
+                <div className="pdf-viewer">
+                  <div className="pdf-header">
+                    <h4>ANGLE LAKE MANOR COMMUNITY CLUB BY-LAWS</h4>
                   </div>
-                  <div className="document-content">
-                    <p><strong>ARTICLE II</strong></p>
-                    <p>Purpose and Objectives</p>
-                    <p><strong>ARTICLE III</strong></p>
-                    <p>Membership and Voting Rights</p>
-                    <p><strong>ARTICLE IV</strong></p>
-                    <p>Board of Directors</p>
-                    <p><strong>Membership</strong></p>
-                    <p>Eligibility requirements and membership procedures...</p>
+                  <div className="pdf-embed-container">
+                    <iframe
+                      src="https://anglelakemanor.com/bylaws.pdf#toolbar=1&navpanes=1&scrollbar=1"
+                      width="100%"
+                      height="600px"
+                      title="ALM Bylaws"
+                      className="pdf-iframe"
+                    />
                   </div>
                 </div>
+                
                 <div className="section-button">
-                  <button className="btn btn-primary">DOWNLOAD BYLAWS</button>
+                  <a 
+                    href="https://anglelakemanor.com/bylaws.pdf"
+                    download="ALM_Community_Club_Bylaws.pdf"
+                    className="btn btn-primary"
+                  >
+                    DOWNLOAD BYLAWS
+                  </a>
                 </div>
               </div>
             </div>

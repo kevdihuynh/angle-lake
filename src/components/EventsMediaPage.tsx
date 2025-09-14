@@ -1,12 +1,42 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { eventsData } from '../data/eventsData'
+import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
 
+
+
 const EventsMediaPage: React.FC = () => {
   const [selectedNewsletter, setSelectedNewsletter] = useState('january-2024')
-  const [selectedMeetingNotes, setSelectedMeetingNotes] = useState('january-2024')
+  const [selectedMeetingNotes, setSelectedMeetingNotes] = useState('august-2025')
+  const [showAllAlbums, setShowAllAlbums] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showAllEvents, setShowAllEvents] = useState(false)
+  const [eventSearchQuery, setEventSearchQuery] = useState('')
+
+
+
+  // Filter events based on search query
+  const filteredEvents = eventsData.filter(event => 
+    event.title.toLowerCase().includes(eventSearchQuery.toLowerCase())
+  )
+
+  // Get events to display (first 3 or all based on showAllEvents)
+  const displayedEvents = showAllEvents ? filteredEvents : filteredEvents.slice(0, 3)
+
+  // Filter cards based on search query
+  const filteredCards = photoVideoData.filter(card => 
+    card.title.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  // Get cards to display (first 3 or all based on showAllAlbums)
+  const displayedCards = showAllAlbums ? filteredCards : filteredCards.slice(0, 3)
+
+  const handleCardClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
 
   const newsletterOptions = [
     { value: 'january-2024', label: 'January, 2024' },
@@ -15,11 +45,32 @@ const EventsMediaPage: React.FC = () => {
     { value: 'may-2017', label: 'May 2017' }
   ]
 
+  // Meeting notes data extracted from https://anglelakemanor.com/minutes.htm
   const meetingNotesOptions = [
-    { value: 'january-2024', label: 'January, 2024' },
-    { value: 'february-2021', label: 'February, 2021' },
-    { value: 'december-2019', label: 'December, 2019' },
-    { value: 'may-2017', label: 'May 2017' }
+    { value: 'august-2025', label: 'August 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
+    { value: 'april-2025', label: 'April 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2025.pdf' },
+    { value: 'february-2025', label: 'February 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2025.pdf' },
+    { value: 'december-2024', label: 'December 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2024.pdf' },
+    { value: 'october-2024', label: 'October 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2024.pdf' },
+    { value: 'august-2024', label: 'August 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2024.pdf' },
+    { value: 'june-2024', label: 'June 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJun2024.pdf' },
+    { value: 'february-2024', label: 'February 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2024.pdf' },
+    { value: 'december-2023', label: 'December 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2023.pdf' },
+    { value: 'october-2023', label: 'October 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2023.pdf' },
+    { value: 'august-2023', label: 'August 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2023.pdf' },
+    { value: 'june-2023', label: 'June 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJun2023.pdf' },
+    { value: 'april-2023', label: 'April 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2023.pdf' },
+    { value: 'february-2023', label: 'February 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2023.pdf' },
+    { value: 'december-2022', label: 'December 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2022.pdf' },
+    { value: 'october-2022', label: 'October 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2022.pdf' },
+    { value: 'august-2022', label: 'August 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2022.pdf' },
+    { value: 'may-2022', label: 'May 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMMay2022.pdf' },
+    { value: 'february-2022', label: 'February 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2022.pdf' },
+    { value: 'october-2021', label: 'October 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2021.pdf' },
+    { value: 'august-2021', label: 'August 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2021.pdf' },
+    { value: 'july-2021', label: 'July 2021 Special Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJuly2021.pdf' },
+    { value: 'june-2021', label: 'June 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJune2021.pdf' },
+    { value: 'april-2021', label: 'April 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2021.pdf' }
   ]
 
   return (
@@ -36,42 +87,38 @@ const EventsMediaPage: React.FC = () => {
             {/* Search Bar */}
             <div className="search-bar">
               <div className="search-icon">🔍</div>
-              <input type="text" placeholder="Search for events..." />
+              <input 
+                type="text" 
+                placeholder="Search for events..." 
+                value={eventSearchQuery}
+                onChange={(e) => setEventSearchQuery(e.target.value)}
+              />
             </div>
 
             {/* Event Cards */}
             <div className="events-grid">
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">First Tuesday of August @ 6 pm</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
+              {displayedEvents.map((event) => (
+                <div key={event.id} className="event-card">
+                  <div className="event-header">
+                    <div className="event-datetime">{event.datetime}</div>
+                    <div className="event-location">{event.location}</div>
+                  </div>
+                  <h3>{event.title}</h3>
+                  <p>{event.description}</p>
                 </div>
-                <h3>ALM Polar Plunge & Brunch</h3>
-                <p>Be sure to bring a donation for the food bank and you will get a raffle ticket. We always have great prizes. The Plunge will take place at Noon.</p>
-              </div>
-              
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">July 4 @ 10 am</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
-                </div>
-                <h3>ALM Independence Day Parade</h3>
-                <p>Meet at the corner of 33rd Ave S and S 194th before 10 am to get decorated. Join us at the end at the beach lot for Ice cream and singing.</p>
-              </div>
-              
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">August 6 @ 6 pm</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
-                </div>
-                <h3>National Night Out Against Crime Picnic and Potluck</h3>
-                <p>Burgers and drinks. Please bring a side dish and/or dessert to share. This is a great way for us to connect with our neighbors and visit with local representatives, city council members and law enforcement.</p>
-              </div>
+              ))}
             </div>
             
-            <div className="section-button">
-              <button className="btn btn-primary">SHOW MORE EVENTS</button>
-            </div>
+            {filteredEvents.length > 3 && (
+              <div className="section-button">
+                <button 
+                  className="btn btn-primary"
+                  onClick={() => setShowAllEvents(!showAllEvents)}
+                >
+                  {showAllEvents ? 'SHOW LESS EVENTS' : `SHOW MORE EVENTS (${filteredEvents.length - 3} more)`}
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -85,45 +132,55 @@ const EventsMediaPage: React.FC = () => {
             {/* Search Bar */}
             <div className="search-bar">
               <div className="search-icon">🔍</div>
-              <input type="text" placeholder="Search for photos..." />
+              <input 
+                type="text" 
+                placeholder="Search for photos and videos..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
 
             {/* Photo/Video Cards */}
             <div className="albums-grid">
-              <div className="album-card">
-                <div className="album-thumbnail">
-                  <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><rect fill='%23E3F2FD' width='300' height='200'/><circle cx='100' cy='80' r='30' fill='%232196F3'/><circle cx='200' cy='120' r='25' fill='%23FF9800'/><rect x='50' y='150' width='200' height='20' fill='%23E0E0E0'/><rect x='60' y='160' width='180' height='15' fill='%23BDBDBD'/></svg>" alt="2024 ALM ALSC Polar Plunge" />
+              {displayedCards.map((card) => (
+                <div 
+                  key={card.id} 
+                  className="album-card"
+                  onClick={() => handleCardClick(card.url)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="album-thumbnail">
+                    <img 
+                      src={card.type === 'video' 
+                        ? `https://png.pngtree.com/png-vector/20250220/ourlarge/pngtree-video-recorder-flat-icon-vector-png-image_15531695.png`
+                        : `https://tse2.mm.bing.net/th/id/OIP.ZL3bhWilBtwGsVTmiszcJgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3`
+                      } 
+                      alt={card.title} 
+                    />
+                    {card.type === 'video' && (
+                      <div className="video-indicator">
+                        <span>▶</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="album-info">
+                    <h4>{card.title}</h4>
+                    <p>{card.date}</p>
+                  </div>
                 </div>
-                <div className="album-info">
-                  <h4>2024 ALM ALSC Polar Plunge</h4>
-                  <p>Jan 1st 2024</p>
-                </div>
-              </div>
-
-              <div className="album-card">
-                <div className="album-thumbnail">
-                  <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><rect fill='%23FFF3E0' width='300' height='200'/><rect x='50' y='50' width='200' height='100' fill='%23FF9800'/><circle cx='100' cy='100' r='20' fill='%23FFC107'/><circle cx='200' cy='100' r='20' fill='%23FFC107'/><rect x='80' y='120' width='140' height='20' fill='%23E65100'/></svg>" alt="2023 ALM Cup O' Cheer" />
-                </div>
-                <div className="album-info">
-                  <h4>2023 ALM Cup O' Cheer</h4>
-                  <p>December 2nd 2023</p>
-                </div>
-              </div>
-
-              <div className="album-card">
-                <div className="album-thumbnail">
-                  <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><rect fill='%231A1A1A' width='300' height='200'/><rect x='100' y='80' width='100' height='40' fill='%23FFD700'/><circle cx='120' cy='100' r='8' fill='%23FF6B6B'/><circle cx='180' cy='100' r='8' fill='%234ECDC4'/><rect x='90' y='140' width='120' height='20' fill='%23333'/><rect x='100' y='150' width='100' height='10' fill='%23666'/></svg>" alt="The Roadhouse - Oct 2023 Ribbon Cutting" />
-                </div>
-                <div className="album-info">
-                  <h4>The Roadhouse - Oct 2023 Ribbon Cutting</h4>
-                  <p>October 29th 2023</p>
-                </div>
-              </div>
+              ))}
             </div>
             
-            <div className="section-button">
-              <button className="btn btn-primary">SHOW MORE ALBUMS</button>
-            </div>
+            {filteredCards.length > 3 && (
+              <div className="section-button">
+                <button 
+                  className="btn btn-primary"
+                  onClick={() => setShowAllAlbums(!showAllAlbums)}
+                >
+                  {showAllAlbums ? 'SHOW LESS ALBUMS' : `SHOW MORE ALBUMS (${filteredCards.length - 3} more)`}
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -155,15 +212,6 @@ const EventsMediaPage: React.FC = () => {
             <div className="pdf-viewer">
               <div className="pdf-header">
                 <h4>ALM Meeting Minutes October 26, 2023</h4>
-                <div className="pdf-controls">
-                  <span>1/2</span>
-                  <span>100%</span>
-                  <button>🔍+</button>
-                  <button>🔍-</button>
-                  <button>⛶</button>
-                  <button>⬇️</button>
-                  <button>🖨️</button>
-                </div>
               </div>
               <div className="pdf-embed-container">
                 <iframe
@@ -209,20 +257,11 @@ const EventsMediaPage: React.FC = () => {
             {/* PDF Viewer */}
             <div className="pdf-viewer">
               <div className="pdf-header">
-                <h4>ALM Meeting Minutes October 26, 2023</h4>
-                <div className="pdf-controls">
-                  <span>1/2</span>
-                  <span>100%</span>
-                  <button>🔍+</button>
-                  <button>🔍-</button>
-                  <button>⛶</button>
-                  <button>⬇️</button>
-                  <button>🖨️</button>
-                </div>
+                <h4>{meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.label}</h4>
               </div>
               <div className="pdf-embed-container">
                 <iframe
-                  src="https://anglelakemanor.com/Minutes/ALMAug2025.pdf#toolbar=1&navpanes=1&scrollbar=1"
+                  src={`${meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.url}#toolbar=1&navpanes=1&scrollbar=1`}
                   width="100%"
                   height="600px"
                   title="ALM Meeting Notes"
@@ -232,7 +271,13 @@ const EventsMediaPage: React.FC = () => {
             </div>
             
             <div className="section-button">
-              <button className="btn btn-primary">DOWNLOAD MEETING NOTES</button>
+              <a 
+                href={meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.url}
+                download={`${meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.label.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`}
+                className="btn btn-primary"
+              >
+                DOWNLOAD MEETING NOTES
+              </a>
             </div>
           </div>
         </section>

@@ -1,10 +1,27 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import { eventsData } from '../data/eventsData'
+import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate()
+
+
+  const handleViewMoreEvents = () => {
+    navigate('/events-media#events')
+  }
+
+  const handleViewMorePhotos = () => {
+    navigate('/events-media#photos-videos')
+  }
+
+  const handleCardClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
 
   return (
     <div className="App">
@@ -16,7 +33,9 @@ const HomePage: React.FC = () => {
             <div className="important-message">
               <div className="message-icon">!</div>
               <h3>Important Message</h3>
-              <p>Our next ALM meeting is at 6 pm on Thursday, February 8 at Tom & Kathy Stewart's, 19346 34th Ave S.</p>
+              <p>Our next ALM meeting is at 6 pm on</p>
+              <p>Thursday, February 8 at Tom & Kathy</p>
+              <p>Stewart's, 19246 34th Ave S.</p>
             </div>
           </div>
         </section>
@@ -45,33 +64,21 @@ const HomePage: React.FC = () => {
               <p>Our next ALM meeting is at 6 pm on Thursday, February 8 at Tom & Kathy Stewart's, 19346 34th Ave S.</p>
             </div>
             <div className="events-grid">
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">First Tuesday of August @ 6 am</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
+              {eventsData.slice(0, 3).map((event) => (
+                <div key={event.id} className="event-card">
+                  <div className="event-header">
+                    <div className="event-datetime">{event.datetime}</div>
+                    <div className="event-location">{event.location}</div>
+                  </div>
+                  <h3>{event.title}</h3>
+                  <p>{event.description}</p>
                 </div>
-                <h3>ALM Polar Plunge & Brunch</h3>
-                <p>Be sure to bring a donation for the food bank and you will be in the DSHS. We always have great prizes. The Plunge will take place at noon.</p>
-              </div>
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">July 4 @ 10 am</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
-                </div>
-                <h3>ALM Independence Day Parade</h3>
-                <p>Meet at the corner of 33rd Ave S and S 192nd St at 9:30 am. The parade will start at 10 am. Join us at the end at the beach lot for ice cream and singing.</p>
-              </div>
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-datetime">August 6 @ 6 pm</div>
-                  <div className="event-location">ALM Community Beach Lot</div>
-                </div>
-                <h3>National Night Out Against Crime Parade and Potluck</h3>
-                <p>Burgers and drinks. Please bring a side dish or dessert to share. This is a great way for us to connect with our neighbors and visit with local representatives, city council members and law enforcement.</p>
-              </div>
+              ))}
             </div>
             <div className="section-button">
-              <button className="btn btn-primary">VIEW MORE UPCOMING EVENTS</button>
+              <button className="btn btn-primary" onClick={handleViewMoreEvents}>
+                VIEW MORE UPCOMING EVENTS
+              </button>
             </div>
           </div>
         </section>
@@ -83,33 +90,37 @@ const HomePage: React.FC = () => {
               <h2>RECENT PHOTOS</h2>
             </div>
             <div className="photos-grid">
-              <div className="photo-card">
-                <div className="photo-placeholder">
-                  <div className="photo-icon">📸</div>
-                  <p>View Gallery</p>
+              {photoVideoData.slice(0, 3).map((card) => (
+                <div 
+                  key={card.id} 
+                  className="photo-card"
+                  onClick={() => handleCardClick(card.url)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="photo-placeholder">
+                    <img 
+                      src={card.type === 'video' 
+                        ? `https://png.pngtree.com/png-vector/20250220/ourlarge/pngtree-video-recorder-flat-icon-vector-png-image_15531695.png`
+                        : `https://tse2.mm.bing.net/th/id/OIP.ZL3bhWilBtwGsVTmiszcJgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3`
+                      } 
+                      alt={card.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    {card.type === 'video' && (
+                      <div className="video-indicator">
+                        <span>▶</span>
+                      </div>
+                    )}
+                  </div>
+                  <h4>{card.title}</h4>
+                  <p>{card.date}</p>
                 </div>
-                <h4>2025 ALSC Tasty Tapas</h4>
-                <p>Aug 8-11, 2025</p>
-              </div>
-              <div className="photo-card">
-                <div className="photo-placeholder">
-                  <div className="photo-icon">🏃‍♂️</div>
-                  <p>View Gallery</p>
-                </div>
-                <h4>ALSC 4th Of July Fun Run</h4>
-                <p>Jul 4-8, 2025</p>
-              </div>
-              <div className="photo-card">
-                <div className="photo-placeholder">
-                  <div className="photo-icon">🎆</div>
-                  <p>View Gallery</p>
-                </div>
-                <h4>2024 ALM 4th of July Parade</h4>
-                <p>Jul 4-5, 2024</p>
-              </div>
+              ))}
             </div>
             <div className="section-button">
-              <button className="btn btn-primary">SEE MORE PHOTOS</button>
+              <button className="btn btn-primary" onClick={handleViewMorePhotos}>
+                SEE MORE PHOTOS
+              </button>
             </div>
           </div>
         </section>
@@ -123,23 +134,6 @@ const HomePage: React.FC = () => {
             <div className="pdf-viewer">
               <div className="pdf-header">
                 <h4>ALM Meeting Minutes - August 2025</h4>
-                <div className="pdf-controls">
-                  <a 
-                    href="https://anglelakemanor.com/Minutes/ALMAug2025.pdf" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="pdf-link"
-                  >
-                    📄 Open Full PDF
-                  </a>
-                  <a 
-                    href="https://anglelakemanor.com/Minutes/ALMAug2025.pdf" 
-                    download="ALMAug2025.pdf"
-                    className="pdf-download"
-                  >
-                    ⬇️ Download
-                  </a>
-                </div>
               </div>
               <div className="pdf-embed-container">
                 <iframe
