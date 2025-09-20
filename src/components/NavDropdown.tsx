@@ -23,7 +23,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<number | null>(null)
   const location = useLocation()
   const navigate = useNavigate()
 
