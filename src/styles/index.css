@@ -59,16 +59,16 @@ p {
 
 /* Color Variables - Updated to match Figma design */
 :root {
-  --primary-navy: #1a365d;
-  --primary-navy-light: #2c5282;
+  --primary-navy: #2d5a87;
+  --primary-navy-light: #4a7b9d;
   --primary-navy-dark: #153e75;
   --secondary-cream: #f7fafc;
   --secondary-cream-dark: #edf2f7;
   --accent-gold: #d69e2e;
   --accent-gold-light: #f6e05e;
   --accent-gold-dark: #b7791f;
-  --water-blue: #3182ce;
-  --water-blue-light: #63b3ed;
+  --water-blue: #3366CC;
+  --water-blue-light: #5a7bd4;
   --neutral-900: #1a202c;
   --neutral-800: #2d3748;
   --neutral-700: #4a5568;

@@ -434,7 +434,7 @@ section[id] {
 }
 
 .btn {
-  background: #3182ce;
+  background: #4A7BFF;
   color: white;
   border: none;
   padding: 0.75rem 2rem;
@@ -445,15 +445,40 @@ section[id] {
 }
 
 .btn:hover {
-  background: #2c5282;
+  background: #3A6BEF;
 }
 
 .btn-primary {
-  background: #3182ce;
+  background: #6B8AFF;
 }
 
 .btn-primary:hover {
-  background: #2c5282;
+  background: #5A7AFF;
+}
+
+.btn-secondary {
+  background: #4A7BFF;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #3A6BEF;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #4A7BFF;
+  border: 2px solid #4A7BFF;
+}
+
+.btn-outline:hover {
+  background: #4A7BFF;
+  color: white;
+}
+
+.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
 }
 
 /* Additional Styles for All Pages */
@@ -737,7 +762,7 @@ section[id] {
 }
 
 .pagination-btn {
-  background: #3182ce;
+  background: #4A7BFF;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -746,7 +771,7 @@ section[id] {
 }
 
 .pagination-btn:hover {
-  background: #2c5282;
+  background: #3A6BEF;
 }
 
 .pagination-info {

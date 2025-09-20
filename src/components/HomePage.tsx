@@ -4,9 +4,9 @@ import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
 import PDFPreview from './PDFPreview'
-// import ContentManager from '../config/ContentManager'
-import { eventsData } from '../data/eventsData'
-import { photoVideoData } from '../data/photoVideoData'
+import ContentManager from '../config/ContentManager'
+// import { eventsData } from '../data/eventsData' // Now using siteConfig
+// import { photoVideoData } from '../data/photoVideoData' // Now using siteConfig
 import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
   }
 
   // Convert events data to CardData format
-  const eventCards: CardData[] = eventsData.slice(0, 3).map(event => ({
+  const eventCards: CardData[] = siteConfig.eventsData.slice(0, 3).map(event => ({
     id: event.id,
     title: event.title,
     description: event.description,
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
   }))
 
   // Convert photo/video data to CardData format
-  const photoCards: CardData[] = photoVideoData.slice(0, 3).map(card => ({
+  const photoCards: CardData[] = siteConfig.photoVideoData.slice(0, 3).map(card => ({
     id: card.id,
     title: card.title,
     date: card.date,
@@ -172,7 +172,7 @@ const HomePage: React.FC = () => {
         </section>
       </main>
       <Footer />
-      {/* <ContentManager /> */}
+      <ContentManager />
     </div>
   )
 }

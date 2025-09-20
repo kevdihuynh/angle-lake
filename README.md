@@ -37,15 +37,30 @@ A modern, responsive website for Angle Lake Manor, a luxury waterfront community
    ```bash
    npm run dev
    ```
+   Or with Content Manager enabled:
+   ```bash
+   npm run dev:cms
+   ```
 
-4. Open your browser and navigate to `http://localhost:3000`
+4. Open your browser and navigate to `http://localhost:5173`
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
+- `npm run dev` - Start development server (Content Manager hidden)
+- `npm run dev:cms` - Start development server with Content Manager enabled
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+
+### Content Management
+
+This website includes a Content Management System (CMS) that allows non-developers to update website content without touching code. The CMS is only available during development:
+
+- **Development with CMS**: Run `npm run dev:cms` to enable the Content Manager interface
+- **Development without CMS**: Run `npm run dev` for normal development
+- **Production**: The CMS is never available in production builds
+
+See `CONTENT_MANAGEMENT_GUIDE.md` for detailed instructions on using the CMS.
 
 ## Design System
 

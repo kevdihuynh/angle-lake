@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
-// import ContentManager from '../config/ContentManager'
+import ContentManager from '../config/ContentManager'
 import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
@@ -187,7 +187,7 @@ const ResourcesPage: React.FC = () => {
         </section>
       </main>
       <Footer />
-      {/* <ContentManager /> */}
+      <ContentManager />
     </div>
   )
 }

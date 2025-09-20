@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-// import ContentManager from '../config/ContentManager'
+import ContentManager from '../config/ContentManager'
 import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
@@ -267,7 +267,7 @@ const PaymentsPage: React.FC = () => {
         </section>
       </main>
       <Footer />
-      {/* <ContentManager /> */}
+      <ContentManager />
     </div>
   )
 }

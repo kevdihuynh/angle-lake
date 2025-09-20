@@ -11,6 +11,14 @@ const ContentManager: React.FC<ContentManagerProps> = ({ onConfigUpdate }) => {
   const [activeTab, setActiveTab] = useState('hero')
   const [showManager, setShowManager] = useState(false)
 
+  // Check if content manager should be enabled
+  const isContentManagerEnabled = import.meta.env.VITE_ENABLE_CONTENT_MANAGER === 'true'
+
+  // Don't render anything if content manager is disabled
+  if (!isContentManagerEnabled) {
+    return null
+  }
+
   // Ensure tab state is preserved
   const handleTabChange = (tabName: string) => {
     console.log('Switching to tab:', tabName) // Debug log
@@ -50,6 +58,50 @@ const ContentManager: React.FC<ContentManagerProps> = ({ onConfigUpdate }) => {
   const removeContact = (index: number) => {
     const newContactInfo = config.contactInfo.filter((_, i) => i !== index)
     handleConfigUpdate('contactInfo', newContactInfo)
+  }
+
+  const handlePhotoVideoUpdate = (index: number, field: keyof typeof config.photoVideoData[0], value: string) => {
+    const newPhotoVideoData = [...config.photoVideoData]
+    newPhotoVideoData[index] = { ...newPhotoVideoData[index], [field]: value }
+    handleConfigUpdate('photoVideoData', newPhotoVideoData)
+  }
+
+  const addPhotoVideo = () => {
+    const newPhotoVideoData = [...config.photoVideoData, {
+      id: (config.photoVideoData.length + 1).toString(),
+      title: '',
+      date: '',
+      url: '',
+      type: 'photo' as const
+    }]
+    handleConfigUpdate('photoVideoData', newPhotoVideoData)
+  }
+
+  const removePhotoVideo = (index: number) => {
+    const newPhotoVideoData = config.photoVideoData.filter((_, i) => i !== index)
+    handleConfigUpdate('photoVideoData', newPhotoVideoData)
+  }
+
+  const handleEventUpdate = (index: number, field: keyof typeof config.eventsData[0], value: string) => {
+    const newEventsData = [...config.eventsData]
+    newEventsData[index] = { ...newEventsData[index], [field]: value }
+    handleConfigUpdate('eventsData', newEventsData)
+  }
+
+  const addEvent = () => {
+    const newEventsData = [...config.eventsData, {
+      id: (config.eventsData.length + 1).toString(),
+      title: '',
+      datetime: '',
+      location: '',
+      description: ''
+    }]
+    handleConfigUpdate('eventsData', newEventsData)
+  }
+
+  const removeEvent = (index: number) => {
+    const newEventsData = config.eventsData.filter((_, i) => i !== index)
+    handleConfigUpdate('eventsData', newEventsData)
   }
 
   const generateConfigCode = () => {
@@ -195,6 +247,18 @@ export const updateSiteConfig = (updates: Partial<SiteConfig>): void => {
             onClick={() => handleTabChange('documents')}
           >
             📄 Documents
+          </button>
+          <button 
+            className={activeTab === 'photos' ? 'active' : ''}
+            onClick={() => handleTabChange('photos')}
+          >
+            📸 Photos/Videos
+          </button>
+          <button 
+            className={activeTab === 'events' ? 'active' : ''}
+            onClick={() => handleTabChange('events')}
+          >
+            📅 Events
           </button>
           <button 
             className={activeTab === 'export' ? 'active' : ''}
@@ -370,6 +434,153 @@ export const updateSiteConfig = (updates: Partial<SiteConfig>): void => {
                   <li><strong>label:</strong> Display name (e.g., 'December 2024 Meeting')</li>
                   <li><strong>url:</strong> PDF file URL</li>
                 </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Photos/Videos Tab */}
+          {activeTab === 'photos' && (
+            <div className="config-section">
+              <h3>Photos & Videos Management</h3>
+              <p>Manage photo albums and video links for the Events + Media page.</p>
+              
+              <div className="section-actions">
+                <button className="btn btn-primary" onClick={addPhotoVideo}>
+                  ➕ Add New Photo/Video
+                </button>
+              </div>
+
+              <div className="config-list">
+                {config.photoVideoData.map((item, index) => (
+                  <div key={item.id} className="config-item">
+                    <div className="item-header">
+                      <h4>Photo/Video #{index + 1}</h4>
+                      <button 
+                        className="btn-remove"
+                        onClick={() => removePhotoVideo(index)}
+                        title="Remove this photo/video"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Title:</label>
+                        <input 
+                          type="text"
+                          value={item.title}
+                          onChange={(e) => handlePhotoVideoUpdate(index, 'title', e.target.value)}
+                          placeholder="e.g., 2025 ALSC Tasty Tapas"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Date:</label>
+                        <input 
+                          type="text"
+                          value={item.date}
+                          onChange={(e) => handlePhotoVideoUpdate(index, 'date', e.target.value)}
+                          placeholder="e.g., 2025 or July 4, 2025"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Type:</label>
+                        <select 
+                          value={item.type}
+                          onChange={(e) => handlePhotoVideoUpdate(index, 'type', e.target.value)}
+                        >
+                          <option value="photo">Photo</option>
+                          <option value="video">Video</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>URL:</label>
+                      <input 
+                        type="url"
+                        value={item.url}
+                        onChange={(e) => handlePhotoVideoUpdate(index, 'url', e.target.value)}
+                        placeholder="https://photos.app.goo.gl/... or https://youtu.be/..."
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Events Tab */}
+          {activeTab === 'events' && (
+            <div className="config-section">
+              <h3>Events Management</h3>
+              <p>Manage upcoming events and activities for the Homepage and Events + Media page.</p>
+              
+              <div className="section-actions">
+                <button className="btn btn-primary" onClick={addEvent}>
+                  ➕ Add New Event
+                </button>
+              </div>
+
+              <div className="config-list">
+                {config.eventsData.map((event, index) => (
+                  <div key={event.id} className="config-item">
+                    <div className="item-header">
+                      <h4>Event #{index + 1}</h4>
+                      <button 
+                        className="btn-remove"
+                        onClick={() => removeEvent(index)}
+                        title="Remove this event"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>Event Title:</label>
+                      <input 
+                        type="text"
+                        value={event.title}
+                        onChange={(e) => handleEventUpdate(index, 'title', e.target.value)}
+                        placeholder="e.g., ALM Polar Plunge & Brunch"
+                      />
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Date & Time:</label>
+                        <input 
+                          type="text"
+                          value={event.datetime}
+                          onChange={(e) => handleEventUpdate(index, 'datetime', e.target.value)}
+                          placeholder="e.g., 11 am, January 1"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Location:</label>
+                        <input 
+                          type="text"
+                          value={event.location}
+                          onChange={(e) => handleEventUpdate(index, 'location', e.target.value)}
+                          placeholder="e.g., ALM Community Beach Lot"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>Description:</label>
+                      <textarea 
+                        value={event.description}
+                        onChange={(e) => handleEventUpdate(index, 'description', e.target.value)}
+                        placeholder="Detailed description of the event..."
+                        rows={3}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

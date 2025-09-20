@@ -4,14 +4,36 @@ This guide explains how to update the website content without touching any code.
 
 ## 🚀 Quick Start
 
-### Option 1: Use the Content Manager Interface (Recommended)
-1. Open the website in your browser
-2. Look for the "⚙️ Content Manager" button in the top-right corner
-3. Click it to open the content management interface
-4. Make your changes using the easy-to-use forms
-5. Copy the generated code and replace the content in `src/config/siteConfig.ts`
+### Development Setup (Content Manager Interface)
+The Content Manager interface is only available during development. To enable it:
 
-### Option 2: Direct File Editing
+1. **Run with Content Manager enabled:**
+   ```bash
+   npm run dev:cms
+   ```
+
+2. **Or run regular development mode:**
+   ```bash
+   npm run dev
+   ```
+   (Content Manager will be hidden)
+
+3. **Look for the "⚙️ Content Manager" button** in the top-right corner (only visible when enabled)
+
+4. **Make your changes** using the easy-to-use forms
+
+5. **Export and apply changes:**
+   - Go to the "💾 Export" tab
+   - Copy the generated code
+   - Replace the content in `src/config/siteConfig.ts`
+
+### Production Deployment
+**Important**: The Content Manager interface is **never available in production**. In production builds:
+- The Content Manager button will not appear
+- All content must be managed through direct file editing
+- The `VITE_ENABLE_CONTENT_MANAGER` environment variable is ignored
+
+### Direct File Editing (Production & Development)
 1. Open `src/config/siteConfig.ts` in a text editor
 2. Find the section you want to update
 3. Make your changes directly in the file
@@ -71,6 +93,28 @@ This guide explains how to update the website content without touching any code.
   - Newsletter PDFs
   - Meeting notes PDFs
   - PDF URLs and labels
+
+### 📸 Photos & Videos
+- **Location**: Events & Media page
+- **What to update**:
+  - Photo album titles
+  - Video titles
+  - Event dates
+  - Photo/video URLs (Google Photos links, YouTube links)
+  - Media type (photo or video)
+  - Add new photo albums or videos
+  - Remove old entries
+
+### 📅 Events
+- **Location**: Homepage and Events & Media page
+- **What to update**:
+  - Event titles
+  - Date and time information
+  - Event locations
+  - Event descriptions
+  - Add new events
+  - Remove old events
+  - Reorder events
 
 ### 🧭 Navigation
 - **Location**: Header navigation

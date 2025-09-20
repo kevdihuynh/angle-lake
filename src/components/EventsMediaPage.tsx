@@ -3,8 +3,8 @@ import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
 import PDFPreview, { PDFOption } from './PDFPreview'
-import { eventsData } from '../data/eventsData'
-import { photoVideoData } from '../data/photoVideoData'
+// import { eventsData } from '../data/eventsData' // Now using siteConfig
+// import { photoVideoData } from '../data/photoVideoData' // Now using siteConfig
 import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
@@ -24,7 +24,7 @@ const EventsMediaPage: React.FC = () => {
 
 
   // Filter events based on search query
-  const filteredEvents = eventsData.filter(event => 
+  const filteredEvents = siteConfig.eventsData.filter(event => 
     event.title.toLowerCase().includes(eventSearchQuery.toLowerCase())
   )
 
@@ -32,7 +32,7 @@ const EventsMediaPage: React.FC = () => {
   const displayedEvents = showAllEvents ? filteredEvents : filteredEvents.slice(0, 3)
 
   // Filter cards based on search query
-  const filteredCards = photoVideoData.filter(card => 
+  const filteredCards = siteConfig.photoVideoData.filter(card => 
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
   )
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import PDFPreview, { PDFOption } from './PDFPreview'
-// import ContentManager from '../config/ContentManager'
+import ContentManager from '../config/ContentManager'
 import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
@@ -125,7 +125,7 @@ const AboutPage: React.FC = () => {
         </section>
       </main>
       <Footer />
-      {/* <ContentManager /> */}
+      <ContentManager />
     </div>
   )
 }

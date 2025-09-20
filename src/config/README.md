@@ -12,9 +12,11 @@ This directory contains all the configurable content for the website, making it 
 ## Quick Start
 
 ### For Non-Developers:
-1. Use the Content Manager interface (⚙️ button on the website)
-2. Make your changes using the forms
-3. Copy the generated code to `siteConfig.ts`
+1. **Development**: Use the Content Manager interface (⚙️ button on the website)
+   - Run `npm run dev:cms` to enable the Content Manager
+   - Make your changes using the forms
+   - Copy the generated code to `siteConfig.ts`
+2. **Production**: Edit `siteConfig.ts` directly (Content Manager not available)
 
 ### For Developers:
 1. Edit `siteConfig.ts` directly
