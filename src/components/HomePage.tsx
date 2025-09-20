@@ -2,10 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
+import Card, { CardData } from './Card'
 import { eventsData } from '../data/eventsData'
 import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
+import './Card.css'
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
@@ -22,6 +24,24 @@ const HomePage: React.FC = () => {
   const handleCardClick = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
+
+  // Convert events data to CardData format
+  const eventCards: CardData[] = eventsData.slice(0, 3).map(event => ({
+    id: event.id,
+    title: event.title,
+    description: event.description,
+    datetime: event.datetime,
+    location: event.location
+  }))
+
+  // Convert photo/video data to CardData format
+  const photoCards: CardData[] = photoVideoData.slice(0, 3).map(card => ({
+    id: card.id,
+    title: card.title,
+    date: card.date,
+    url: card.url,
+    type: card.type as 'video' | 'photo'
+  }))
 
   return (
     <div className="App">
@@ -64,15 +84,12 @@ const HomePage: React.FC = () => {
               <p>Our next ALM meeting is at 6 pm on Thursday, February 8 at Tom & Kathy Stewart's, 19346 34th Ave S.</p>
             </div>
             <div className="events-grid">
-              {eventsData.slice(0, 3).map((event) => (
-                <div key={event.id} className="event-card">
-                  <div className="event-header">
-                    <div className="event-datetime">{event.datetime}</div>
-                    <div className="event-location">{event.location}</div>
-                  </div>
-                  <h3>{event.title}</h3>
-                  <p>{event.description}</p>
-                </div>
+              {eventCards.map((card) => (
+                <Card
+                  key={card.id}
+                  data={card}
+                  variant="event"
+                />
               ))}
             </div>
             <div className="section-button">
@@ -90,31 +107,13 @@ const HomePage: React.FC = () => {
               <h2>RECENT PHOTOS</h2>
             </div>
             <div className="photos-grid">
-              {photoVideoData.slice(0, 3).map((card) => (
-                <div 
-                  key={card.id} 
-                  className="photo-card"
-                  onClick={() => handleCardClick(card.url)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="photo-placeholder">
-                    <img 
-                      src={card.type === 'video' 
-                        ? `https://png.pngtree.com/png-vector/20250220/ourlarge/pngtree-video-recorder-flat-icon-vector-png-image_15531695.png`
-                        : `https://tse2.mm.bing.net/th/id/OIP.ZL3bhWilBtwGsVTmiszcJgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3`
-                      } 
-                      alt={card.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                    {card.type === 'video' && (
-                      <div className="video-indicator">
-                        <span>▶</span>
-                      </div>
-                    )}
-                  </div>
-                  <h4>{card.title}</h4>
-                  <p>{card.date}</p>
-                </div>
+              {photoCards.map((card) => (
+                <Card
+                  key={card.id}
+                  data={card}
+                  variant="photo-video"
+                  onClick={() => handleCardClick(card.url!)}
+                />
               ))}
             </div>
             <div className="section-button">

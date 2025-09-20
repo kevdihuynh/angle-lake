@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import Card, { CardData } from './Card'
 import { eventsData } from '../data/eventsData'
 import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
+import './Card.css'
 
 
 
@@ -37,6 +39,24 @@ const EventsMediaPage: React.FC = () => {
   const handleCardClick = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
+
+  // Convert events data to CardData format
+  const eventCards: CardData[] = displayedEvents.map(event => ({
+    id: event.id,
+    title: event.title,
+    description: event.description,
+    datetime: event.datetime,
+    location: event.location
+  }))
+
+  // Convert photo/video data to CardData format
+  const photoVideoCards: CardData[] = displayedCards.map(card => ({
+    id: card.id,
+    title: card.title,
+    date: card.date,
+    url: card.url,
+    type: card.type as 'video' | 'photo'
+  }))
 
   const newsletterOptions = [
     { value: 'january-2024', label: 'January, 2024' },
@@ -97,15 +117,12 @@ const EventsMediaPage: React.FC = () => {
 
             {/* Event Cards */}
             <div className="events-grid">
-              {displayedEvents.map((event) => (
-                <div key={event.id} className="event-card">
-                  <div className="event-header">
-                    <div className="event-datetime">{event.datetime}</div>
-                    <div className="event-location">{event.location}</div>
-                  </div>
-                  <h3>{event.title}</h3>
-                  <p>{event.description}</p>
-                </div>
+              {eventCards.map((card) => (
+                <Card
+                  key={card.id}
+                  data={card}
+                  variant="event"
+                />
               ))}
             </div>
             
@@ -142,32 +159,13 @@ const EventsMediaPage: React.FC = () => {
 
             {/* Photo/Video Cards */}
             <div className="albums-grid">
-              {displayedCards.map((card) => (
-                <div 
-                  key={card.id} 
-                  className="album-card"
-                  onClick={() => handleCardClick(card.url)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="album-thumbnail">
-                    <img 
-                      src={card.type === 'video' 
-                        ? `https://png.pngtree.com/png-vector/20250220/ourlarge/pngtree-video-recorder-flat-icon-vector-png-image_15531695.png`
-                        : `https://tse2.mm.bing.net/th/id/OIP.ZL3bhWilBtwGsVTmiszcJgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3`
-                      } 
-                      alt={card.title} 
-                    />
-                    {card.type === 'video' && (
-                      <div className="video-indicator">
-                        <span>▶</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="album-info">
-                    <h4>{card.title}</h4>
-                    <p>{card.date}</p>
-                  </div>
-                </div>
+              {photoVideoCards.map((card) => (
+                <Card
+                  key={card.id}
+                  data={card}
+                  variant="photo-video"
+                  onClick={() => handleCardClick(card.url!)}
+                />
               ))}
             </div>
             

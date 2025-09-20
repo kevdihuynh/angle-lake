@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import Card, { CardData } from './Card'
 import './Header.css'
 import './Footer.css'
+import './Card.css'
 
 const ResourcesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -42,6 +44,15 @@ const ResourcesPage: React.FC = () => {
   // Get ads to display (first 3 or all based on showAllAds)
   const displayedAds = showAllAds ? filteredAds : filteredAds.slice(0, 3)
 
+  // Convert member ads data to CardData format
+  const memberAdCards: CardData[] = displayedAds.map(ad => ({
+    id: ad.id,
+    title: ad.title,
+    description: ad.description,
+    website: ad.website,
+    phone: ad.phone
+  }))
+
   return (
     <div className="App">
       <Header />
@@ -62,15 +73,12 @@ const ResourcesPage: React.FC = () => {
               />
             </div>
             <div className="ads-grid">
-              {displayedAds.map((ad) => (
-                <div key={ad.id} className="ad-card">
-                  <div className="ad-header">
-                    <div className="ad-website">Website: {ad.website}</div>
-                    <div className="ad-phone">Call: {ad.phone}</div>
-                  </div>
-                  <h3>{ad.title}</h3>
-                  <p>{ad.description}</p>
-                </div>
+              {memberAdCards.map((card) => (
+                <Card
+                  key={card.id}
+                  data={card}
+                  variant="member-ad"
+                />
               ))}
             </div>
             {filteredAds.length > 3 && (
