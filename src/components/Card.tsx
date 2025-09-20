@@ -60,8 +60,8 @@ const Card: React.FC<CardProps> = ({ data, variant = 'event', onClick }) => {
       <div className="card-image-container">
         <img 
           src={data.imageUrl || (data.type === 'video' 
-            ? 'https://png.pngtree.com/png-vector/20250220/ourlarge/pngtree-video-recorder-flat-icon-vector-png-image_15531695.png'
-            : 'https://tse2.mm.bing.net/th/id/OIP.ZL3bhWilBtwGsVTmiszcJgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3'
+            ? 'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NDEzNTAwOTQ%3D/original/5b72040c-761c-462e-bd14-c3d39376bd1b.png?im_w=720'
+            : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/fe/ce/68/angle-lake-park.jpg?w=1200&h=-1&s=1'
           )} 
           alt={data.title}
           className="card-image"
