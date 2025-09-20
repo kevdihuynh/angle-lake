@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import PDFPreview, { PDFOption } from './PDFPreview'
+// import ContentManager from '../config/ContentManager'
+import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
 import './PDFPreview.css'
@@ -9,43 +11,10 @@ import './PDFPreview.css'
 const AboutPage: React.FC = () => {
   const [selectedCovenant, setSelectedCovenant] = useState('snively-tracts')
 
-  const covenantOptions: PDFOption[] = [
-    { value: 'snively-tracts', label: 'Covenants - Snively\'s Angle Lake Tracts', url: 'https://anglelakemanor.com/ALMNovember2010Covenants.pdf' },
-    { value: 'petition-signatures', label: 'ALM Covenants - ALM Petition Signatures for Version', url: 'https://anglelakemanor.com/PetitionSignaturesRevisions.pdf' },
-    { value: 'wa-state-bar', label: '2004 WA State Bar Assoc. CC&R Guidelines', url: 'https://anglelakemanor.com/ALM%20Law%20Assn%20CCR%20numbered.pdf' }
-  ]
-  const clubOfficers = [
-    {
-      title: 'Treasurer',
-      name: 'Sid Sherman',
-      phone: '(206) 555-0101',
-      email: 'sid@anglelakemanor.com'
-    },
-    {
-      title: 'President & Beach Lot Manager',
-      name: 'Terri Sue Stockinger',
-      phone: '(206) 555-0102',
-      email: 'terri@anglelakemanor.com'
-    },
-    {
-      title: 'VP Of Administration',
-      name: 'Rick Smith',
-      phone: '(206) 555-0103',
-      email: 'rick@anglelakemanor.com'
-    },
-    {
-      title: 'Secretary',
-      name: 'Jill Carlson',
-      phone: '(206) 555-0104',
-      email: 'jill@anglelakemanor.com'
-    },
-    {
-      title: 'VP Of Architectural Control Committee',
-      name: 'Kyle Marshall',
-      phone: '(206) 555-0105',
-      email: 'kyle@anglelakemanor.com'
-    }
-  ]
+  // Use configuration data
+  const covenantOptions: PDFOption[] = siteConfig.aboutPage.covenants
+  const clubOfficers = siteConfig.aboutPage.clubOfficers
+  const beachRules = siteConfig.aboutPage.beachRules
 
   return (
     <div className="App">
@@ -97,8 +66,8 @@ const AboutPage: React.FC = () => {
                 <h3>BYLAWS</h3>
                 
                 <PDFPreview
-                  title="ANGLE LAKE MANOR COMMUNITY CLUB BY-LAWS"
-                  pdfUrl="https://anglelakemanor.com/bylaws.pdf"
+                  title={siteConfig.aboutPage.bylaws.title}
+                  pdfUrl={siteConfig.aboutPage.bylaws.pdfUrl}
                   downloadButtonText="DOWNLOAD BYLAWS"
                   showSelector={false}
                   showDownloadButton={true}
@@ -119,63 +88,36 @@ const AboutPage: React.FC = () => {
               <div className="rules-subsection">
                 <h3>Private Beach Rules - Posted</h3>
                 <ul className="rules-list">
-                  <li>Guests must be accompanied by a member.</li>
-                  <li>Children must be accompanied by a parent. Not responsible for accidents.</li>
-                  <li>No pets allowed.</li>
-                  <li>Gates must be locked at all times.</li>
-                  <li>No boat storage at lot.</li>
-                  <li>Beach lot closes at 10 PM.</li>
-                  <li>After boat launching, vehicles and trailers must be removed from beach lot.</li>
-                  <li>Parking for owners only.</li>
+                  {beachRules.postedRules.map((rule, index) => (
+                    <li key={index}>{rule}</li>
+                  ))}
                 </ul>
               </div>
 
               <div className="rules-subsection">
                 <h3>Private Beach Rules - Addendum</h3>
                 <ol className="rules-numbered-list">
-                  <li>Access to the beach lot is restricted to members only during designated hours.</li>
-                  <li>All gates must be secured immediately after entry or exit.</li>
-                  <li>Guests must be accompanied by a member at all times.</li>
-                  <li>Children under 12 must be supervised by a parent or guardian.</li>
-                  <li>Members are responsible for the conduct of their guests.</li>
-                  <li>No pets are permitted on the beach lot premises.</li>
-                  <li>Enforcement of these rules is the responsibility of the Beach Committee.</li>
-                  <li>Violations should be reported to the Beach Committee Chair.</li>
-                  <li>Complaints will be investigated within 48 hours.</li>
-                  <li>Penalties for violations may include temporary suspension of beach privileges.</li>
-                  <li>Repeated violations may result in permanent loss of beach access.</li>
-                  <li>Appeals may be made to the Board of Directors within 7 days.</li>
-                  <li>Emergency situations should be reported immediately to security.</li>
-                  <li>All members must carry their access card at all times.</li>
-                  <li>Lost or stolen access cards must be reported immediately.</li>
-                  <li>Replacement cards are available for a $25 fee.</li>
-                  <li>Beach lot hours are 6 AM to 10 PM daily.</li>
-                  <li>Special events may require advance notice and approval.</li>
-                  <li>Maintenance work will be posted 24 hours in advance.</li>
-                  <li>These rules may be amended by majority vote of the Board.</li>
-                  <li>All members are responsible for reading and understanding these rules.</li>
+                  {beachRules.addendumRules.map((rule, index) => (
+                    <li key={index}>{rule}</li>
+                  ))}
                 </ol>
               </div>
 
               <div className="rules-subsection">
                 <h3>Definitions:</h3>
                 <div className="definitions">
-                  <p><strong>Member (Owner):</strong> Defined by property ownership and current dues payment.</p>
-                  <p><strong>Children:</strong> Legal dependents aged 12 and under.</p>
-                  <p><strong>Young adults:</strong> Legal dependents aged 13 and over.</p>
-                  <p><strong>Caregiver:</strong> A person legally employed by a Member.</p>
-                  <p><strong>Guests:</strong> Anyone not defined above.</p>
-                  <p><strong>The Public:</strong> Anyone not defined above.</p>
+                  {beachRules.definitions.map((def, index) => (
+                    <p key={index}><strong>{def.term}:</strong> {def.definition}</p>
+                  ))}
                 </div>
               </div>
 
               <div className="rules-subsection">
                 <h3>Foundation for Community Beach Lot rules:</h3>
                 <div className="foundation-text">
-                  <p>The community beach lot is a shared resource owned collectively by all members of Angle Lake Manor. This shared ownership comes with shared responsibilities and restrictions designed to protect the investment and ensure fair access for all members.</p>
-                  <p>Homeowner's insurance policies typically cover liability for accidents that occur on the property, but this coverage is contingent upon adherence to established safety rules and proper maintenance of the facility.</p>
-                  <p>The covenants and restrictions governing the beach lot are legally binding and enforceable. These rules are designed to maintain property values, ensure safety, and provide a pleasant environment for all residents.</p>
-                  <p>Public access to the beach lot is strictly prohibited. The facility is maintained through member dues and is intended solely for the use and enjoyment of current members in good standing.</p>
+                  {beachRules.foundation.map((text, index) => (
+                    <p key={index}>{text}</p>
+                  ))}
                 </div>
               </div>
             </div>
@@ -183,6 +125,7 @@ const AboutPage: React.FC = () => {
         </section>
       </main>
       <Footer />
+      {/* <ContentManager /> */}
     </div>
   )
 }

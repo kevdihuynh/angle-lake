@@ -5,6 +5,7 @@ import Card, { CardData } from './Card'
 import PDFPreview, { PDFOption } from './PDFPreview'
 import { eventsData } from '../data/eventsData'
 import { photoVideoData } from '../data/photoVideoData'
+import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
 import './Card.css'
@@ -60,40 +61,9 @@ const EventsMediaPage: React.FC = () => {
     type: card.type as 'video' | 'photo'
   }))
 
-  const newsletterOptions: PDFOption[] = [
-    { value: 'january-2024', label: 'January, 2024', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
-    { value: 'february-2021', label: 'February, 2021', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
-    { value: 'december-2019', label: 'December, 2019', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
-    { value: 'may-2017', label: 'May 2017', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' }
-  ]
-
-  // Meeting notes data extracted from https://anglelakemanor.com/minutes.htm
-  const meetingNotesOptions: PDFOption[] = [
-    { value: 'august-2025', label: 'August 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
-    { value: 'april-2025', label: 'April 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2025.pdf' },
-    { value: 'february-2025', label: 'February 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2025.pdf' },
-    { value: 'december-2024', label: 'December 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2024.pdf' },
-    { value: 'october-2024', label: 'October 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2024.pdf' },
-    { value: 'august-2024', label: 'August 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2024.pdf' },
-    { value: 'june-2024', label: 'June 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJun2024.pdf' },
-    { value: 'february-2024', label: 'February 2024 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2024.pdf' },
-    { value: 'december-2023', label: 'December 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2023.pdf' },
-    { value: 'october-2023', label: 'October 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2023.pdf' },
-    { value: 'august-2023', label: 'August 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2023.pdf' },
-    { value: 'june-2023', label: 'June 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJun2023.pdf' },
-    { value: 'april-2023', label: 'April 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2023.pdf' },
-    { value: 'february-2023', label: 'February 2023 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2023.pdf' },
-    { value: 'december-2022', label: 'December 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMDec2022.pdf' },
-    { value: 'october-2022', label: 'October 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2022.pdf' },
-    { value: 'august-2022', label: 'August 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2022.pdf' },
-    { value: 'may-2022', label: 'May 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMMay2022.pdf' },
-    { value: 'february-2022', label: 'February 2022 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2022.pdf' },
-    { value: 'october-2021', label: 'October 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMOct2021.pdf' },
-    { value: 'august-2021', label: 'August 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2021.pdf' },
-    { value: 'july-2021', label: 'July 2021 Special Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJuly2021.pdf' },
-    { value: 'june-2021', label: 'June 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMJune2021.pdf' },
-    { value: 'april-2021', label: 'April 2021 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2021.pdf' }
-  ]
+  // Use configuration data for PDF options
+  const newsletterOptions: PDFOption[] = siteConfig.newsletters
+  const meetingNotesOptions: PDFOption[] = siteConfig.meetingNotes
 
   return (
     <div className="App">

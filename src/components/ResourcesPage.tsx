@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
+// import ContentManager from '../config/ContentManager'
+import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
 import './Card.css'
@@ -10,30 +12,13 @@ const ResourcesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [showAllAds, setShowAllAds] = useState(false)
 
-  // Member ads data from Figma design
-  const memberAds = [
-    {
-      id: '1',
-      website: 'sing.com',
-      phone: '888-888-8888',
-      title: 'Singing Lessons with Bob',
-      description: 'Designed for all ages, our singing lessons bring out your strengths & build your vocal confidence.'
-    },
-    {
-      id: '2',
-      website: 'swim.com',
-      phone: '888-888-8888',
-      title: 'Swimming Lessons with Sam',
-      description: 'We offer group and private swim lessons with eight stages of development so you can find a class that\'s just right for you.'
-    },
-    {
-      id: '3',
-      website: 'landscape.com',
-      phone: '888-888-8888',
-      title: 'Lee\'s Landscaping',
-      description: 'Lee\'s General Landscaping is an award winning full-service landscaping and yard clean up company. We have been in operation for over 30 years.'
-    }
-  ]
+  // Use configuration data
+  const memberAds = siteConfig.resourcesPage.memberAds
+  const waterDataLinks = siteConfig.resourcesPage.waterDataLinks
+  const fishingLinks = siteConfig.resourcesPage.fishingLinks
+  const almInfo = siteConfig.resourcesPage.almInfo
+  const alscInfo = siteConfig.resourcesPage.alscInfo
+  const cityInfo = siteConfig.resourcesPage.cityInfo
 
   // Filter ads based on search query
   const filteredAds = memberAds.filter(ad => 
@@ -103,14 +88,11 @@ const ResourcesPage: React.FC = () => {
             <div className="subsection">
               <h3>HYPERLINKS</h3>
               <ul className="links-list">
-                <li><a href="https://anglelakemanor.com/water-data/current-statistics" target="_blank" rel="noopener noreferrer">Angle Lake Current Water Statistics</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/2020-water-quality-report" target="_blank" rel="noopener noreferrer">2020 Angle Lake Water Quality Report</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/2016-water-level-report" target="_blank" rel="noopener noreferrer">2016 Angle Lake Water Level Report</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/2012-water-quality-report" target="_blank" rel="noopener noreferrer">2012 Angle Lake Water Quality Report</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/multiyear-comparison-2009" target="_blank" rel="noopener noreferrer">Angle Lake Level - Multiyear Comparison on August 31, 2009</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/water-level-comparison" target="_blank" rel="noopener noreferrer">Water Level Comparison</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/hydrogeologic-cross-section" target="_blank" rel="noopener noreferrer">Hydrogeologic Cross Section F-F'</a></li>
-                <li><a href="https://anglelakemanor.com/water-data/potentiometric-surface" target="_blank" rel="noopener noreferrer">Potentiometric Surface of Aquifer Qua</a></li>
+                {waterDataLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -125,7 +107,11 @@ const ResourcesPage: React.FC = () => {
             <div className="subsection">
               <h3>HYPERLINKS</h3>
               <ul className="links-list">
-                <li><a href="https://wdfw.wa.gov/" target="_blank" rel="noopener noreferrer">Washington Department of Fish & Wildlife</a></li>
+                {fishingLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -140,39 +126,33 @@ const ResourcesPage: React.FC = () => {
             
             <div className="comparison-content">
               <div className="comparison-item">
-                <h3>What is Angle Lake Manor?</h3>
-                <p>Angle Lake Manor is a Homeowners Association representing 88 homes located on the west side of Angle Lake. We meet bi-monthly on the 2nd Thursday of Feb, Apr, June, Aug, Oct & Dec. Our major events include:</p>
+                <h3>{almInfo.title}</h3>
+                <p>{almInfo.description}</p>
                 <ul>
-                  <li>4th of July Parade & Ice Cream Social</li>
-                  <li>National Night Out Against Crime</li>
-                  <li>Holiday Party</li>
-                  <li>White Elephant Gift Exchange</li>
+                  {almInfo.events.map((event, index) => (
+                    <li key={index}>{event}</li>
+                  ))}
                 </ul>
                 <p>We handle annual maintenance, collect dues, and communicate through email, WhatsApp, and Facebook Group. Stay informed about community events and important updates through our various communication channels.</p>
-                <p><strong>Contact:</strong> For more information about ALM, please contact our board members.</p>
+                <p><strong>Contact:</strong> {almInfo.contact}</p>
               </div>
               
               <div className="comparison-item">
-                <h3>What is Angle Lake Shore Club?</h3>
-                <p>Angle Lake Shore Club is a social organization for residents and non-residents. New members receive information through our blog, newsletters, and Facebook Community pages. Contact Jean for more information. Dues are $20 per household.</p>
+                <h3>{alscInfo.title}</h3>
+                <p>{alscInfo.description}</p>
                 <p>Our planned activities for the year include:</p>
                 <ol>
-                  <li>Polar Bear Plunge</li>
-                  <li>Fishing Derby</li>
-                  <li>Swim and Boat Races</li>
-                  <li>Clean Sweep & Lunch</li>
-                  <li>Tasty Tacos</li>
-                  <li>Holiday Lights Boat Cruise</li>
-                  <li>Holiday Party</li>
-                  <li>Members Only Holiday Party</li>
+                  {alscInfo.activities.map((activity, index) => (
+                    <li key={index}>{activity}</li>
+                  ))}
                 </ol>
-                <p><em>Note: Quoted costs may change.</em></p>
+                <p><em>{alscInfo.note}</em></p>
               </div>
             </div>
             
             <div className="section-button">
               <a 
-                href="https://angleshoreclub.blogspot.com/" 
+                href={alscInfo.blogUrl}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -190,12 +170,12 @@ const ResourcesPage: React.FC = () => {
               <h2>CITY OF SEATAC</h2>
             </div>
             <div className="city-content">
-              <h3>Welcome!</h3>
-              <p>The City of SeaTac was incorporated in February 1990. Located in the Pacific Northwest, SeaTac is a vibrant community with a population of 30,000. We are proud to be home to the Seattle-Tacoma International Airport, serving as a gateway to the Pacific Northwest.</p>
+              <h3>{cityInfo.title}</h3>
+              <p>{cityInfo.description}</p>
             </div>
             <div className="section-button">
               <a 
-                href="https://www.seatacwa.gov/" 
+                href={cityInfo.learnMoreUrl}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -207,6 +187,7 @@ const ResourcesPage: React.FC = () => {
         </section>
       </main>
       <Footer />
+      {/* <ContentManager /> */}
     </div>
   )
 }

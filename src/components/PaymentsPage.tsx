@@ -1,20 +1,13 @@
 import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+// import ContentManager from '../config/ContentManager'
+import { siteConfig } from '../config/siteConfig'
 import './Header.css'
 import './Footer.css'
 
 const PaymentsPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    amount: '100.00',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'johndoe@gmail.com',
-    address: '8888 13th Ave S, Seattle, WA 98168',
-    notes: 'Fundraising for Improve Beach Ltd...',
-    paymentType: 'annual-dues',
-    paymentMethod: 'paypal'
-  })
+  const [formData, setFormData] = useState(siteConfig.paymentsPage.defaultFormData)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -30,35 +23,9 @@ const PaymentsPage: React.FC = () => {
     console.log('Form submitted:', formData)
   }
 
-  const paymentHistory = [
-    {
-      name: 'John Doe',
-      email: 'jd123@gmail.com',
-      notes: 'annual due to 888 13th ave...',
-      type: 'Annual Due',
-      method: 'Venmo',
-      amount: '$100.00',
-      date: '12/6/2024'
-    },
-    {
-      name: 'John Doe',
-      email: 'jd125@gmail.com',
-      notes: 'polar bear plunge fundraising...',
-      type: 'Donation',
-      method: 'Cash/Check',
-      amount: '$50.00',
-      date: '10/23/2024'
-    },
-    {
-      name: 'John Doe',
-      email: 'jd123@gmail.com',
-      notes: 'for a good cause...',
-      type: 'Donation',
-      method: 'PayPal',
-      amount: '$25.00',
-      date: '1/1/2025'
-    }
-  ]
+  // Use configuration data
+  const paymentHistory = siteConfig.paymentsPage.paymentHistory
+  const treasurerReport = siteConfig.paymentsPage.treasurerReport
 
   return (
     <div className="App">
@@ -270,12 +237,12 @@ const PaymentsPage: React.FC = () => {
                 <span>Viewing</span>
                 <a href="#" className="report-link">
                   <span className="report-dot">●</span>
-                  2024 Angle Lake Manor Club Financial Statement
+                  {treasurerReport.title}
                 </a>
               </div>
               <div className="document-viewer">
                 <div className="document-header">
-                  <h4>WASHINGTON STATE RECORDER'S Cover Sheet</h4>
+                  <h4>{treasurerReport.documentTitle}</h4>
                   <div className="document-controls">
                     <button>🔍</button>
                     <button>⬇️</button>
@@ -284,11 +251,12 @@ const PaymentsPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="document-content">
-                  <p><strong>Return Address:</strong> Kurt Nordquist 19208 39th Ave S Seattle, WA 98188</p>
-                  <div className="barcode">20120827000664</div>
-                  <p><strong>RECORDS, B&M MISC PAGE 1 OF 009 08/27/2012 11:18 KING COUNTY, WA</strong></p>
-                  <p>Please print or type information WASHINGTON STATE RECORDER'S Cover Sheet (RCW 65.04)</p>
-                  <p><strong>Document Title(s) (or transactions contained therein):</strong></p>
+                  <p><strong>Return Address:</strong> {treasurerReport.returnAddress}</p>
+                  <div className="barcode">{treasurerReport.barcode}</div>
+                  <p><strong>{treasurerReport.documentInfo}</strong></p>
+                  {treasurerReport.documentContent.map((content, index) => (
+                    <p key={index}>{content}</p>
+                  ))}
                 </div>
               </div>
             </div>
@@ -299,6 +267,7 @@ const PaymentsPage: React.FC = () => {
         </section>
       </main>
       <Footer />
+      {/* <ContentManager /> */}
     </div>
   )
 }
