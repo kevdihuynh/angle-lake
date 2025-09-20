@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
+import PDFPreview, { PDFOption } from './PDFPreview'
 import { eventsData } from '../data/eventsData'
 import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
 import './Card.css'
+import './PDFPreview.css'
 
 
 
@@ -58,15 +60,15 @@ const EventsMediaPage: React.FC = () => {
     type: card.type as 'video' | 'photo'
   }))
 
-  const newsletterOptions = [
-    { value: 'january-2024', label: 'January, 2024' },
-    { value: 'february-2021', label: 'February, 2021' },
-    { value: 'december-2019', label: 'December, 2019' },
-    { value: 'may-2017', label: 'May 2017' }
+  const newsletterOptions: PDFOption[] = [
+    { value: 'january-2024', label: 'January, 2024', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
+    { value: 'february-2021', label: 'February, 2021', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
+    { value: 'december-2019', label: 'December, 2019', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
+    { value: 'may-2017', label: 'May 2017', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' }
   ]
 
   // Meeting notes data extracted from https://anglelakemanor.com/minutes.htm
-  const meetingNotesOptions = [
+  const meetingNotesOptions: PDFOption[] = [
     { value: 'august-2025', label: 'August 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMAug2025.pdf' },
     { value: 'april-2025', label: 'April 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMApr2025.pdf' },
     { value: 'february-2025', label: 'February 2025 Meeting', url: 'https://anglelakemanor.com/Minutes/ALMFeb2025.pdf' },
@@ -98,7 +100,7 @@ const EventsMediaPage: React.FC = () => {
       <Header />
       <main className="main-content">
         {/* Events Section */}
-        <section id="events" className="events-section">
+        <section id="events" className="events-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>EVENTS</h2>
@@ -140,7 +142,7 @@ const EventsMediaPage: React.FC = () => {
         </section>
 
         {/* Photos & Videos Section */}
-        <section id="photos-videos" className="photos-videos-section">
+        <section id="photos-videos" className="photos-videos-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>PHOTOS & VIDEOS</h2>
@@ -183,100 +185,40 @@ const EventsMediaPage: React.FC = () => {
         </section>
 
         {/* Newsletters Section */}
-        <section id="newsletters" className="newsletters-section">
+        <section id="newsletters" className="newsletters-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>NEWSLETTERS</h2>
             </div>
             
-            {/* Viewing Selector */}
-            <div className="viewing-selector">
-              <span>Viewing</span>
-              <select 
-                value={selectedNewsletter} 
-                onChange={(e) => setSelectedNewsletter(e.target.value)}
-                className="dropdown"
-              >
-                {newsletterOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <span className="newsletter-title">ALM Newsletter</span>
-            </div>
-
-            {/* PDF Viewer */}
-            <div className="pdf-viewer">
-              <div className="pdf-header">
-                <h4>ALM Meeting Minutes October 26, 2023</h4>
-              </div>
-              <div className="pdf-embed-container">
-                <iframe
-                  src="https://anglelakemanor.com/Minutes/ALMAug2025.pdf#toolbar=1&navpanes=1&scrollbar=1"
-                  width="100%"
-                  height="600px"
-                  title="ALM Newsletter"
-                  className="pdf-iframe"
-                />
-              </div>
-            </div>
-            
-            <div className="section-button">
-              <button className="btn btn-primary">DOWNLOAD NEWSLETTER</button>
-            </div>
+            <PDFPreview
+              title="ALM Newsletter"
+              selectedValue={selectedNewsletter}
+              options={newsletterOptions}
+              onSelectionChange={setSelectedNewsletter}
+              downloadButtonText="DOWNLOAD NEWSLETTER"
+              showSelector={true}
+              showDownloadButton={true}
+            />
           </div>
         </section>
 
         {/* Meeting Notes Section */}
-        <section id="meeting-notes" className="meeting-notes-section">
+        <section id="meeting-notes" className="meeting-notes-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>MEETING NOTES</h2>
             </div>
             
-            {/* Viewing Selector */}
-            <div className="viewing-selector">
-              <span>Viewing</span>
-              <select 
-                value={selectedMeetingNotes} 
-                onChange={(e) => setSelectedMeetingNotes(e.target.value)}
-                className="dropdown"
-              >
-                {meetingNotesOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <span className="newsletter-title">ALM Meeting Notes</span>
-            </div>
-
-            {/* PDF Viewer */}
-            <div className="pdf-viewer">
-              <div className="pdf-header">
-                <h4>{meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.label}</h4>
-              </div>
-              <div className="pdf-embed-container">
-                <iframe
-                  src={`${meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.url}#toolbar=1&navpanes=1&scrollbar=1`}
-                  width="100%"
-                  height="600px"
-                  title="ALM Meeting Notes"
-                  className="pdf-iframe"
-                />
-              </div>
-            </div>
-            
-            <div className="section-button">
-              <a 
-                href={meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.url}
-                download={`${meetingNotesOptions.find(opt => opt.value === selectedMeetingNotes)?.label.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`}
-                className="btn btn-primary"
-              >
-                DOWNLOAD MEETING NOTES
-              </a>
-            </div>
+            <PDFPreview
+              title="ALM Meeting Notes"
+              selectedValue={selectedMeetingNotes}
+              options={meetingNotesOptions}
+              onSelectionChange={setSelectedMeetingNotes}
+              downloadButtonText="DOWNLOAD MEETING NOTES"
+              showSelector={true}
+              showDownloadButton={true}
+            />
           </div>
         </section>
       </main>

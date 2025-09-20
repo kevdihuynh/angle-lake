@@ -1,0 +1,155 @@
+/* PDF Preview Component Styles */
+
+.pdf-preview-container {
+  width: 100%;
+}
+
+/* Viewing Selector */
+.viewing-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.viewing-selector .dropdown {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  font-size: 0.9rem;
+  min-width: 200px;
+}
+
+.pdf-type-title {
+  font-weight: 600;
+  color: #333;
+}
+
+/* PDF Viewer */
+.pdf-viewer {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-header {
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pdf-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pdf-embed-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* PDF Fallback */
+.pdf-fallback {
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.pdf-fallback p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pdf-fallback a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pdf-fallback a:hover {
+  text-decoration: underline;
+}
+
+/* Section Button */
+.section-button {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.btn-primary {
+  background: #2563eb;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .viewing-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .viewing-selector .dropdown {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .pdf-embed-container {
+    height: 500px;
+  }
+  
+  .pdf-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .pdf-header h4 {
+    font-size: 1rem;
+  }
+  
+  .pdf-fallback {
+    padding: 0.75rem 1rem;
+  }
+  
+  .btn {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}

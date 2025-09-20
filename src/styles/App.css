@@ -115,6 +115,11 @@ section[id] {
   font-weight: 700;
   color: #1a202c;
   margin: 0;
+}
+
+/* Only add left margin when there's an icon before the h2 */
+.section-header .megaphone-icon + h2,
+.section-header .section-icon + h2 {
   margin-left: 1rem;
 }
 
@@ -1479,4 +1484,13 @@ section[id] {
 
 .dropdown-result strong {
   color: var(--primary-navy);
+}
+
+/* Alternating Section Backgrounds */
+.section-white {
+  background: white;
+}
+
+.section-grey {
+  background: #e2e8f0;
 }

@@ -65,7 +65,7 @@ const PaymentsPage: React.FC = () => {
       <Header />
       <main className="main-content">
         {/* Make Payment Section */}
-        <section id="pay-dues" className="payment-form-section">
+        <section id="pay-dues" className="payment-form-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>MAKE PAYMENT</h2>
@@ -218,7 +218,7 @@ const PaymentsPage: React.FC = () => {
         </section>
 
         {/* Payment History Section */}
-        <section id="payment-status" className="payment-history-section">
+        <section id="payment-status" className="payment-history-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>PAYMENT HISTORY</h2>
@@ -260,7 +260,7 @@ const PaymentsPage: React.FC = () => {
         </section>
 
         {/* Treasurer's Report Section */}
-        <section id="treasurer-reports" className="treasurer-report-section">
+        <section id="treasurer-reports" className="treasurer-report-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>TREASURER'S REPORT</h2>

@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Card, { CardData } from './Card'
+import PDFPreview from './PDFPreview'
 import { eventsData } from '../data/eventsData'
 import { photoVideoData } from '../data/photoVideoData'
 import './Header.css'
 import './Footer.css'
 import './Card.css'
+import './PDFPreview.css'
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
@@ -19,6 +21,10 @@ const HomePage: React.FC = () => {
 
   const handleViewMorePhotos = () => {
     navigate('/events-media#photos-videos')
+  }
+
+  const handleViewMoreMeetingNotes = () => {
+    navigate('/events-media#meeting-notes')
   }
 
   const handleCardClick = (url: string) => {
@@ -61,7 +67,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Announcements Section */}
-        <section id="announcements" className="announcements-section">
+        <section id="announcements" className="announcements-section section-white">
           <div className="container">
             <div className="section-header">
               <div className="megaphone-icon">📢</div>
@@ -74,7 +80,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Upcoming Events Section */}
-        <section id="events" className="events-section">
+        <section id="events" className="events-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>UPCOMING EVENTS</h2>
@@ -101,7 +107,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Recent Photos Section */}
-        <section id="photos" className="photos-section">
+        <section id="photos" className="photos-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>RECENT PHOTOS</h2>
@@ -125,36 +131,26 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Recent Meeting Notes Section */}
-        <section id="meeting-notes" className="meeting-notes-section">
+        <section id="meeting-notes" className="meeting-notes-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>RECENT MEETING NOTES</h2>
             </div>
-            <div className="pdf-viewer">
-              <div className="pdf-header">
-                <h4>ALM Meeting Minutes - August 2025</h4>
-              </div>
-              <div className="pdf-embed-container">
-                <iframe
-                  src="https://anglelakemanor.com/Minutes/ALMAug2025.pdf#toolbar=1&navpanes=1&scrollbar=1"
-                  width="100%"
-                  height="600px"
-                  title="ALM Meeting Minutes August 2025"
-                  className="pdf-iframe"
-                />
-              </div>
-              <div className="pdf-fallback">
-                <p>If the PDF doesn't load, you can <a href="https://anglelakemanor.com/Minutes/ALMAug2025.pdf" target="_blank" rel="noopener noreferrer">view it directly here</a>.</p>
-              </div>
-            </div>
+            <PDFPreview
+              title="ALM Meeting Minutes - August 2025"
+              pdfUrl="https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
+              downloadButtonText="VIEW MORE MEETING NOTES"
+              showFallback={true}
+              showDownloadButton={false}
+            />
             <div className="section-button">
-              <button className="btn btn-primary">VIEW MORE MEETING NOTES</button>
+              <button className="btn btn-primary" onClick={handleViewMoreMeetingNotes}>VIEW MORE MEETING NOTES</button>
             </div>
           </div>
         </section>
 
         {/* Contact Us Section */}
-        <section id="contact" className="contact-section">
+        <section id="contact" className="contact-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>CONTACT US</h2>

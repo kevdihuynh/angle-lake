@@ -58,7 +58,7 @@ const ResourcesPage: React.FC = () => {
       <Header />
       <main className="main-content">
         {/* ALM Member Ads Section */}
-        <section id="member-ads" className="member-ads-section">
+        <section id="member-ads" className="member-ads-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>ALM MEMBER ADS</h2>
@@ -95,7 +95,7 @@ const ResourcesPage: React.FC = () => {
         </section>
 
         {/* Angle Lake Information & Water Data Section */}
-        <section id="water-data" className="water-data-section">
+        <section id="water-data" className="water-data-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>ANGLE LAKE INFORMATION & WATER DATA</h2>
@@ -117,7 +117,7 @@ const ResourcesPage: React.FC = () => {
         </section>
 
         {/* Fishing Guidelines Section */}
-        <section id="fishing-guidelines" className="fishing-guidelines-section">
+        <section id="fishing-guidelines" className="fishing-guidelines-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>FISHING GUIDELINES</h2>
@@ -132,7 +132,7 @@ const ResourcesPage: React.FC = () => {
         </section>
 
         {/* ALM vs ALSC Section */}
-        <section id="alm-vs-alsc" className="alm-vs-alsc-section">
+        <section id="alm-vs-alsc" className="alm-vs-alsc-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>ANGLE LAKE MANOR (ALM) VS ANGLE LAKE SHORE CLUB (ALSC)</h2>
@@ -184,7 +184,7 @@ const ResourcesPage: React.FC = () => {
         </section>
 
         {/* City of SeaTac Section */}
-        <section id="city-seatac" className="city-section">
+        <section id="city-seatac" className="city-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>CITY OF SEATAC</h2>
