@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                   isActive={isActive('/about')}
                 />
               </li>
-              <li style={{ display: 'none' }}>
+              <li>
                 <NavDropdown 
                   label="PAYMENTS" 
                   items={paymentsItems}

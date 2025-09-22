@@ -111,6 +111,7 @@ export interface SiteConfig {
   // PDF Documents
   newsletters: PDFDocument[]
   meetingNotes: PDFDocument[]
+  treasurerReports: PDFDocument[]
   
   // Default PDF Preview
   defaultMeetingNotes: {
@@ -213,7 +214,7 @@ export const siteConfig: SiteConfig = {
     payments: [
       { label: 'Pay My Dues', path: '/payments#pay-dues' },
       { label: 'Have I Paid My Dues?', path: '/payments#payment-status' },
-      { label: 'Donate', path: '/payments#donate' },
+      { label: 'Donate', path: '/payments#pay-dues' },
       { label: "Treasurer's Reports", path: '/payments#treasurer-reports' }
     ],
     resources: [
@@ -423,7 +424,94 @@ export const siteConfig: SiteConfig = {
       "label": "April 2021 Meeting",
       "url": "https://anglelakemanor.com/Minutes/ALMApr2021.pdf"
     }
-  ],
+   ],
+   "treasurerReports": [
+     {
+       "value": "2025",
+       "label": "2025 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2025TreasurerReport.pdf"
+     },
+     {
+       "value": "2024",
+       "label": "2024 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2024TreasurerReport.pdf"
+     },
+     {
+       "value": "2023",
+       "label": "2023 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2023TreasurersReport.pdf"
+     },
+     {
+       "value": "2022",
+       "label": "2022 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2022TreasurersReport.pdf"
+     },
+     {
+       "value": "2021",
+       "label": "2021 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2021TreasurersReport.pdf"
+     },
+     {
+       "value": "2020",
+       "label": "2020 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2020TreasurersReport.pdf"
+     },
+     {
+       "value": "2019",
+       "label": "2019 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2019TreasurersReport.pdf"
+     },
+     {
+       "value": "2018",
+       "label": "2018 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2018TreasurersReport.pdf"
+     },
+     {
+       "value": "2017",
+       "label": "2017 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2017TreasurersReport.pdf"
+     },
+     {
+       "value": "2016",
+       "label": "2016 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2016TreasurersReport.pdf"
+     },
+     {
+       "value": "2015",
+       "label": "2015 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2015TreasurersReport.pdf"
+     },
+     {
+       "value": "2012",
+       "label": "2012 Angle Lake Manor Club Financial Statement",
+       "url": "https://anglelakemanor.com/2012FinancialStatement.pdf"
+     },
+     {
+       "value": "2010",
+       "label": "2010 Monthly Income and Expenses",
+       "url": "https://anglelakemanor.com/ALMClubIncome&Expenses2010.pdf"
+     },
+     {
+       "value": "2009",
+       "label": "2009 Monthly Income and Expenses",
+       "url": "https://anglelakemanor.com/2009%20Monthly%20Income%20and%20Expenses.pdf"
+     },
+     {
+       "value": "2008",
+       "label": "2008 Monthly Income and Expenses",
+       "url": "https://anglelakemanor.com/ALM%20Club%20Income%20and%20Expenses%202008.pdf"
+     },
+     {
+       "value": "2007",
+       "label": "2007 Monthly Income and Expenses",
+       "url": "https://anglelakemanor.com/2007%20Monthly%20Income%20and%20Expenses.pdf"
+     },
+     {
+       "value": "2006",
+       "label": "2006 Monthly Income and Expenses",
+       "url": "https://anglelakemanor.com/2006%20Monthly%20Income%20and%20Expenses.pdf"
+     }
+   ],
    "defaultMeetingNotes": {
      "title": "ALM Meeting Minutes - August 2025",
      "pdfUrl": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
@@ -597,16 +685,16 @@ export const siteConfig: SiteConfig = {
    
    // Payments Page Configuration
    paymentsPage: {
-     defaultFormData: {
-       amount: '100.00',
-       firstName: 'John',
-       lastName: 'Doe',
-       email: 'johndoe@gmail.com',
-       address: '8888 13th Ave S, Seattle, WA 98168',
-       notes: 'Fundraising for Improve Beach Ltd...',
-       paymentType: 'annual-dues',
-       paymentMethod: 'paypal'
-     },
+    defaultFormData: {
+      amount: '$100.00',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'johndoe@gmail.com',
+      address: '8888 15th Ave N, Seattle, WA 99999',
+      notes: 'fundraising to improve beach lot...',
+      paymentType: 'annual-dues',
+      paymentMethod: 'cash-check'
+    },
      paymentHistory: [
        {
          name: 'John Doe',
