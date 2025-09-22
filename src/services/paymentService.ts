@@ -30,7 +30,7 @@ export interface PaymentData {
 
 export interface MockStripePaymentIntent {
   id: string
-  status: 'requires_payment_method' | 'requires_confirmation' | 'processing' | 'succeeded' | 'canceled'
+  status: 'requires_payment_method' | 'requires_confirmation' | 'processing' | 'succeeded' | 'canceled' | 'failed'
   amount: number
   currency: string
   client_secret: string

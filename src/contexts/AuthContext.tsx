@@ -55,10 +55,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signInWithMagicLink = async (email: string, emailLink: string): Promise<void> => {
     try {
-      const result = await signInWithEmailLink(auth, email, emailLink)
+      await signInWithEmailLink(auth, email, emailLink)
       // Clear the email from storage
       window.localStorage.removeItem('emailForSignIn')
-      return result
     } catch (error) {
       console.error('Error signing in with magic link:', error)
       throw error
