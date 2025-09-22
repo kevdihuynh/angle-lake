@@ -26,7 +26,8 @@ const LoginPage: React.FC = () => {
       await sendMagicLink(email)
       setMessage(`A magic link has been sent to ${email}. Please check your email and click the link to sign in.`)
     } catch (error) {
-      setMessage('Error sending magic link. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Error sending magic link. Please try again.'
+      setMessage(errorMessage)
       console.error('Magic link error:', error)
     } finally {
       setLoading(false)

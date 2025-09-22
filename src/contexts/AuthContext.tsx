@@ -8,6 +8,7 @@ import {
   signOut
 } from 'firebase/auth'
 import { auth } from '../config/firebase'
+import { siteConfig } from '../config/siteConfig'
 
 interface AuthContextType {
   currentUser: User | null
@@ -36,6 +37,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   const sendMagicLink = async (email: string): Promise<void> => {
+    // Check if email is authorized
+    const authorizedEmails = siteConfig.authorizedUsers.emails
+    const adminEmails = siteConfig.authorizedUsers.adminEmails
+    const allAuthorizedEmails = [...authorizedEmails, ...adminEmails]
+    
+    if (!allAuthorizedEmails.includes(email.toLowerCase())) {
+      throw new Error('This email address is not authorized to access the payments system. Please contact the administrator.')
+    }
+
     const actionCodeSettings = {
       // URL you want to redirect back to after the user clicks the link
       url: `${window.location.origin}/auth/callback`,

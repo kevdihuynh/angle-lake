@@ -87,6 +87,12 @@ export interface SiteConfig {
   siteTitle: string
   siteSubtitle: string
   
+  // Authorization
+  authorizedUsers: {
+    emails: string[]
+    adminEmails: string[]
+  }
+  
   // Navigation
   navigation: {
     home: NavDropdownItem[]
@@ -196,6 +202,24 @@ export const siteConfig: SiteConfig = {
   // Site Branding
   siteTitle: "ANGLE LAKE MANOR",
   siteSubtitle: "COMMUNITY CLUB",
+  
+  // Authorization - Only these users can access payments and admin features
+  authorizedUsers: {
+    emails: [
+      'kevdiihuynh@gmail.com',
+      'member1@anglelakemanor.com',
+      'member2@anglelakemanor.com',
+      'anglelakemanor.dev@gmail.com'
+      // Add more member emails here
+    ],
+    adminEmails: [
+      'admin@anglelakemanor.com',
+      'treasurer@anglelakemanor.com',
+      'kevdiihuynh@gmail.com', // You can be an admin too
+      'anglelakemanor.dev@gmail.com'
+      // Add more admin emails here
+    ]
+  },
   
   // Navigation
   navigation: {
