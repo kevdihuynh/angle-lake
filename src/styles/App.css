@@ -704,6 +704,21 @@ section[id] {
   box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.1);
 }
 
+/* Error styling for form fields */
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.1);
+}
+
+.field-error {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
 .radio-group {
   display: flex;
   flex-direction: column;
@@ -742,10 +757,12 @@ section[id] {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 
 .payment-table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
 }
 
@@ -1139,11 +1156,13 @@ section[id] {
   
   .payment-table {
     font-size: 0.875rem;
+    min-width: 600px;
   }
   
   .payment-table th,
   .payment-table td {
     padding: 0.5rem;
+    font-size: 0.8rem;
   }
   
   .officers-grid {

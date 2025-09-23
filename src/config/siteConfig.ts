@@ -189,6 +189,9 @@ export interface SiteConfig {
     }
   }
   
+  // Venmo Payment Configuration
+  venmoQRCode: string
+  
   // Events + Media Page
   eventsData: EventCard[]
   photoVideoData: PhotoVideoCard[]
@@ -760,6 +763,9 @@ export const siteConfig: SiteConfig = {
        ]
      }
   },
+  
+  // Venmo Payment Configuration
+  venmoQRCode: 'https://venmo.com/code?user_id=@AngleLakeManor&amount=100.00&note=ALM%20Annual%20Dues',
   
   // Events + Media Page
   eventsData: [

@@ -3,21 +3,36 @@ import Header from './Header'
 import Footer from './Footer'
 import ContentManager from '../config/ContentManager'
 import PDFPreview from './PDFPreview'
+import VenmoPaymentConfirmation from './VenmoPaymentConfirmation'
 import { siteConfig } from '../config/siteConfig'
 import { useAuth } from '../contexts/AuthContext'
+import { useAuth as useDevAuth } from '../contexts/DevAuthContext'
 import { paymentService, PaymentData } from '../services/paymentService'
 import './Header.css'
 import './Footer.css'
 import './PDFPreview.css'
+import './VenmoPaymentConfirmation.css'
 
 const PaymentsPage: React.FC = () => {
-  const { currentUser, logout } = useAuth()
+  // Try to use dev auth first, fallback to regular auth
+  let currentUser, logout
+  try {
+    const devAuth = useDevAuth()
+    currentUser = devAuth.currentUser
+    logout = devAuth.logout
+  } catch {
+    const auth = useAuth()
+    currentUser = auth.currentUser
+    logout = auth.logout
+  }
   const [formData, setFormData] = useState(siteConfig.paymentsPage.defaultFormData)
   const [userPayments, setUserPayments] = useState<PaymentData[]>([])
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState('')
   const [selectedTreasurerReport, setSelectedTreasurerReport] = useState('2025')
+  const [showVenmoConfirmation, setShowVenmoConfirmation] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<{[key: string]: string}>({})
 
   // Load user's payment history
   useEffect(() => {
@@ -47,6 +62,22 @@ const PaymentsPage: React.FC = () => {
       ...prev,
       [name]: value
     }))
+    
+    // Clear field error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }))
+    }
+  }
+
+  // Helper function to parse amount safely
+  const parseAmount = (amountString: string): number => {
+    // Remove dollar signs, commas, and other formatting
+    const cleanAmount = amountString.replace(/[$,\s]/g, '')
+    const parsed = parseFloat(cleanAmount)
+    return isNaN(parsed) ? 0 : parsed
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,20 +88,69 @@ const PaymentsPage: React.FC = () => {
       return
     }
 
+    // Clear previous errors
+    setFieldErrors({})
+    setMessage('')
+
+    // Validate form data and set field-specific errors
+    const errors: {[key: string]: string} = {}
+    let hasErrors = false
+
+    // Validate amount
+    const parsedAmount = parseAmount(formData.amount)
+    if (!formData.amount.trim()) {
+      errors.amount = 'Amount is required'
+      hasErrors = true
+    } else if (parsedAmount <= 0) {
+      errors.amount = 'Please enter a valid amount'
+      hasErrors = true
+    }
+
+    // Validate required fields
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required'
+      hasErrors = true
+    }
+    if (!formData.lastName.trim()) {
+      errors.lastName = 'Last name is required'
+      hasErrors = true
+    }
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required'
+      hasErrors = true
+    }
+    if (!formData.address.trim()) {
+      errors.address = 'Home address is required'
+      hasErrors = true
+    }
+
+    // If there are validation errors, set them and return
+    if (hasErrors) {
+      setFieldErrors(errors)
+      return
+    }
+
+    // If Venmo is selected, show confirmation screen
+    if (formData.paymentMethod === 'venmo') {
+      setShowVenmoConfirmation(true)
+      return
+    }
+    
+    // For other payment methods, process directly
+    await processPayment()
+  }
+
+  const processPayment = async () => {
+    if (!currentUser) return
+
     setSubmitting(true)
     setMessage('')
 
     try {
-      // Validate form data
-      if (!formData.amount || parseFloat(formData.amount) <= 0) {
-        setMessage('Please enter a valid amount')
-        return
-      }
-
       const paymentData = {
         userId: currentUser.uid,
         userEmail: currentUser.email || '',
-        amount: parseFloat(formData.amount),
+        amount: parseAmount(formData.amount),
         paymentType: formData.paymentType as 'annual-dues' | 'donation' | 'both',
         paymentMethod: formData.paymentMethod as 'cash-check' | 'venmo' | 'paypal' | 'credit-card',
         firstName: formData.firstName,
@@ -83,6 +163,8 @@ const PaymentsPage: React.FC = () => {
       
       if (result.success) {
         setMessage('Payment submitted successfully!')
+        // Clear any field errors
+        setFieldErrors({})
         // Reset form
         setFormData(siteConfig.paymentsPage.defaultFormData)
         // Reload payment history
@@ -98,6 +180,15 @@ const PaymentsPage: React.FC = () => {
     }
   }
 
+  const handleVenmoPaymentConfirmed = async () => {
+    await processPayment()
+    setShowVenmoConfirmation(false)
+  }
+
+  const handleBackToForm = () => {
+    setShowVenmoConfirmation(false)
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -106,6 +197,25 @@ const PaymentsPage: React.FC = () => {
     }
   }
 
+
+  // Show Venmo confirmation screen if Venmo is selected
+  if (showVenmoConfirmation) {
+    return (
+      <VenmoPaymentConfirmation
+        paymentData={{
+          amount: formData.amount,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          address: formData.address,
+          paymentType: formData.paymentType,
+          notes: formData.notes
+        }}
+        onPaymentConfirmed={handleVenmoPaymentConfirmed}
+        onBack={handleBackToForm}
+      />
+    )
+  }
 
   return (
     <div className="App">
@@ -156,58 +266,83 @@ const PaymentsPage: React.FC = () => {
             </div>
             <form className="payment-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="amount">Amount</label>
+                <label htmlFor="amount">Amount *</label>
                 <input
                   type="text"
                   id="amount"
                   name="amount"
                   value={formData.amount}
                   onChange={handleInputChange}
+                  required
+                  className={fieldErrors.amount ? 'error' : ''}
                 />
+                {fieldErrors.amount && (
+                  <div className="field-error">{fieldErrors.amount}</div>
+                )}
               </div>
               
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
+                  <label htmlFor="firstName">First Name *</label>
                   <input
                     type="text"
                     id="firstName"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
+                    required
+                    className={fieldErrors.firstName ? 'error' : ''}
                   />
+                  {fieldErrors.firstName && (
+                    <div className="field-error">{fieldErrors.firstName}</div>
+                  )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
+                  <label htmlFor="lastName">Last Name *</label>
                   <input
                     type="text"
                     id="lastName"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
+                    required
+                    className={fieldErrors.lastName ? 'error' : ''}
                   />
+                  {fieldErrors.lastName && (
+                    <div className="field-error">{fieldErrors.lastName}</div>
+                  )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email *</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
+                    required
+                    className={fieldErrors.email ? 'error' : ''}
                   />
+                  {fieldErrors.email && (
+                    <div className="field-error">{fieldErrors.email}</div>
+                  )}
                 </div>
               </div>
               
               <div className="form-group">
-                <label htmlFor="address">Home Address</label>
+                <label htmlFor="address">Home Address *</label>
                 <input
                   type="text"
                   id="address"
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
+                  required
+                  className={fieldErrors.address ? 'error' : ''}
                 />
+                {fieldErrors.address && (
+                  <div className="field-error">{fieldErrors.address}</div>
+                )}
               </div>
               
               <div className="form-group">
@@ -340,6 +475,8 @@ const PaymentsPage: React.FC = () => {
                       <th>TYPE</th>
                       <th>METHOD</th>
                       <th>AMOUNT</th>
+                      <th>EMAIL</th>
+                      <th>ADDRESS</th>
                       <th>STATUS</th>
                       <th>DATE</th>
                       <th>NOTES</th>
@@ -355,6 +492,12 @@ const PaymentsPage: React.FC = () => {
                           {payment.paymentMethod.replace('-', ' ')}
                         </td>
                         <td>${payment.amount.toFixed(2)}</td>
+                        <td style={{ fontSize: '0.9rem' }}>
+                          {payment.userEmail}
+                        </td>
+                        <td style={{ fontSize: '0.9rem', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={payment.address}>
+                          {payment.address}
+                        </td>
                         <td>
                           <span style={{
                             padding: '4px 8px',

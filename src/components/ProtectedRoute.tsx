@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useAuth as useDevAuth } from '../contexts/DevAuthContext'
 import { siteConfig } from '../config/siteConfig'
 
 interface ProtectedRouteProps {
@@ -8,7 +9,17 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { currentUser, loading } = useAuth()
+  // Try to use dev auth first, fallback to regular auth
+  let currentUser, loading
+  try {
+    const devAuth = useDevAuth()
+    currentUser = devAuth.currentUser
+    loading = devAuth.loading
+  } catch {
+    const auth = useAuth()
+    currentUser = auth.currentUser
+    loading = auth.loading
+  }
 
   if (loading) {
     return (

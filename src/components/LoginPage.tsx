@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { useAuth as useDevAuth } from '../contexts/DevAuthContext'
 import Header from './Header'
 import Footer from './Footer'
 import './Header.css'
@@ -9,7 +10,16 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
-  const { sendMagicLink } = useAuth()
+  
+  // Try to use dev auth first, fallback to regular auth
+  let sendMagicLink
+  try {
+    const devAuth = useDevAuth()
+    sendMagicLink = devAuth.sendMagicLink
+  } catch {
+    const auth = useAuth()
+    sendMagicLink = auth.sendMagicLink
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,7 +34,16 @@ const LoginPage: React.FC = () => {
 
     try {
       await sendMagicLink(email)
-      setMessage(`A magic link has been sent to ${email}. Please check your email and click the link to sign in.`)
+      
+      // In development mode, redirect immediately
+      if (import.meta.env.VITE_SKIP_AUTH === 'true') {
+        setMessage('🚀 Development mode: Redirecting to payments...')
+        setTimeout(() => {
+          window.location.href = '/payments'
+        }, 1000)
+      } else {
+        setMessage(`A magic link has been sent to ${email}. Please check your email and click the link to sign in.`)
+      }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Error sending magic link. Please try again.'
       setMessage(errorMessage)
@@ -42,7 +61,20 @@ const LoginPage: React.FC = () => {
           <div className="container">
             <div className="section-header">
               <h2>SIGN IN TO YOUR ACCOUNT</h2>
-              <p>Enter your email address to receive a secure sign-in link</p>
+              {import.meta.env.VITE_SKIP_AUTH === 'true' ? (
+                <div style={{ 
+                  backgroundColor: '#e6f3ff', 
+                  border: '1px solid #3182ce', 
+                  borderRadius: '4px', 
+                  padding: '10px', 
+                  marginBottom: '20px',
+                  textAlign: 'center'
+                }}>
+                  🚀 <strong>Development Mode</strong> - Auth bypassed for testing
+                </div>
+              ) : (
+                <p>Enter your email address to receive a secure sign-in link</p>
+              )}
             </div>
             
             <div style={{ maxWidth: '400px', margin: '0 auto' }}>
