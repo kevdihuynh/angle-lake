@@ -89,6 +89,7 @@ export interface SiteConfig {
   siteTitle: string
   siteSubtitle: string
   contactEmail: string
+  connectFormUrl: string
   
   // Authorization
   authorizedUsers: {
@@ -209,6 +210,7 @@ export const siteConfig: SiteConfig = {
   siteTitle: "ANGLE LAKE MANOR",
   siteSubtitle: "COMMUNITY CLUB",
   contactEmail: "test@anglelakemanor.com",
+  connectFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSd9TKbgF0bmx0Lu4c267D7apZiIrpOx482FM8lvO16vGiBWEw/viewform",
   
   // Authorization - Only these users can access payments and admin features
   authorizedUsers: {

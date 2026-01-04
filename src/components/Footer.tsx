@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="footer-right">
-            <a href={`mailto:${siteConfig.contactEmail}`} className="footer-email-link">Connect with us</a>
+            <a href={siteConfig.connectFormUrl} target="_blank" rel="noopener noreferrer" className="footer-email-link">Connect with us</a>
             {/* <div className="social-links">
               <a href="#" aria-label="Facebook" className="social-icon facebook">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
