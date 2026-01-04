@@ -326,7 +326,7 @@ export const siteConfig: SiteConfig = {
      name: 'Tani Rae Standridge',
      phone: '(206) 300-5740',
      email: 'tanirae@gmail.com',
-     image: '/src/assets/officers/tani_rae.jpg'
+     image: '/officers/tani_rae.jpg'
    },
    {
      role: 'Web Master',
@@ -629,9 +629,9 @@ export const siteConfig: SiteConfig = {
       }
     ],
      covenants: [
-       { value: 'snively-tracts', label: 'Covenants - Snively\'s Angle Lake Tracts', url: 'https://anglelakemanor.com/ALMNovember2010Covenants.pdf' },
-       { value: 'petition-signatures', label: 'ALM Covenants - ALM Petition Signatures for Version', url: 'https://anglelakemanor.com/PetitionSignaturesRevisions.pdf' },
-       { value: 'wa-state-bar', label: '2004 WA State Bar Assoc. CC&R Guidelines', url: 'https://anglelakemanor.com/ALM%20Law%20Assn%20CCR%20numbered.pdf' }
+       { value: 'snively-tracts', label: 'Covenants - Snively\'s Angle Lake Tracts', url: '/pdfs/ALMNovember2010Covenants.pdf' },
+       { value: 'petition-signatures', label: 'ALM Covenants - ALM Petition Signatures for Version', url: '/pdfs/PetitionSignaturesRevisions.pdf' },
+       { value: 'wa-state-bar', label: '2004 WA State Bar Assoc. CC&R Guidelines', url: '/pdfs/ALM%20Law%20Assn%20CCR%20numbered.pdf' }
      ],
      bylaws: {
        title: 'ANGLE LAKE MANOR COMMUNITY CLUB BY-LAWS',
