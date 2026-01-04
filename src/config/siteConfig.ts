@@ -253,7 +253,6 @@ export const siteConfig: SiteConfig = {
     resources: [
       { label: 'ALM Member Ads', path: '/resources#member-ads' },
       { label: 'Angle Lake Information & Water Data', path: '/resources#water-data' },
-      { label: 'Fishing Guidelines', path: '/resources#fishing-guidelines' },
       { label: 'Angle Lake Manor vs ALSC', path: '/resources#alm-vs-alsc' },
       { label: 'City of SeaTac', path: '/resources#city-seatac' }
     ],
