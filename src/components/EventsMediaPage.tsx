@@ -162,7 +162,7 @@ const EventsMediaPage: React.FC = () => {
             </div>
             
             <PDFPreview
-              title="ALM Newsletter"
+              title=""
               selectedValue={selectedNewsletter}
               options={newsletterOptions}
               onSelectionChange={setSelectedNewsletter}
@@ -181,7 +181,7 @@ const EventsMediaPage: React.FC = () => {
             </div>
             
             <PDFPreview
-              title="ALM Meeting Notes"
+              title=""
               selectedValue={selectedMeetingNotes}
               options={meetingNotesOptions}
               onSelectionChange={setSelectedMeetingNotes}

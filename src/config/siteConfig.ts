@@ -7,6 +7,7 @@ export interface ContactInfo {
   name: string
   phone: string
   email: string
+  image?: string
 }
 
 export interface ImportantMessage {
@@ -57,6 +58,7 @@ export interface ClubOfficer {
   name: string
   phone: string
   email: string
+  image?: string
 }
 
 export interface MemberAd {
@@ -86,6 +88,7 @@ export interface SiteConfig {
   // Site Branding
   siteTitle: string
   siteSubtitle: string
+  contactEmail: string
   
   // Authorization
   authorizedUsers: {
@@ -205,6 +208,7 @@ export const siteConfig: SiteConfig = {
   // Site Branding
   siteTitle: "ANGLE LAKE MANOR",
   siteSubtitle: "COMMUNITY CLUB",
+  contactEmail: "test@anglelakemanor.com",
   
   // Authorization - Only these users can access payments and admin features
   authorizedUsers: {
@@ -278,36 +282,59 @@ export const siteConfig: SiteConfig = {
   },
   "contactInfo": [
     {
-      "role": "President & Beach Lot Manager",
-      "name": "Ted Van Blaricom",
-      "phone": "(206) 555-0123",
-      "email": "ted@anglelakemanor.com"
+      role: 'President',
+      name: 'Tani Rae Standridge',
+      phone: '(206) 300-5740',
+      email: 'tanirae@gmail.com',
+      image: '/src/assets/officers/tani_rae.jpg'
     },
     {
-      "role": "VP Of Administration",
-      "name": "Dean Martin",
-      "phone": "(206) 555-0124",
-      "email": "dean@anglelakemanor.com"
+      role: 'VP of Administration',
+      name: 'Dave Rankin',
+      phone: '(206) 261-1611',
+      email: 'drankin102@gmail.com',
+      image: '/src/assets/officers/dave_rankin.jpg'
     },
     {
-      "role": "VP Of Architectural Control Committee",
-      "name": "Eric Christenson",
-      "phone": "(206) 555-0125",
-      "email": "eric@anglelakemanor.com"
+      role: 'VP of Architectural Control Committee',
+      name: 'Pat Patterson',
+      phone: '',
+      email: '',
     },
     {
-      "role": "Secretary",
-      "name": "Deb Anderson",
-      "phone": "(206) 555-0126",
-      "email": "deb@anglelakemanor.com"
+      role: 'Scribes',
+      name: 'Deb Anderson',
+      phone: '(206) 941-7760',
+      email: 'ulvi220@comcast.net',
+      image: '/src/assets/officers/deb_anderson.jpg'
     },
-    {
-      "role": "Treasurer",
-      "name": "Bob Simmons",
-      "phone": "(206) 555-0127",
-      "email": "bob@anglelakemanor.com"
-    }
-  ],
+   {
+     role: 'Scribes',
+     name: 'Kathy Stewart',
+     phone: '(206) 878-1130',
+     email: 'tazs77@comcast.net',
+   },
+   {
+     role: 'Treasurer',
+     name: 'Bob Simmons',
+     phone: '(360) 747-3773',
+     email: 'almcc.treasurer@gmail.com',
+     image: '/src/assets/officers/bob_simmons.jpg'
+   },
+   {
+     role: 'Beach Lot Manager',
+     name: 'Tani Rae Standridge',
+     phone: '(206) 300-5740',
+     email: 'tanirae@gmail.com',
+     image: '/src/assets/officers/tani_rae.jpg'
+   },
+   {
+     role: 'Web Master',
+     name: 'Ricki Mudd',
+     phone: '(206) 229-8552',
+     email: 'rick.mudd@gmail.com',
+   }
+ ],
   "newsletters": [
     {
       "value": "january-2024",
@@ -548,36 +575,59 @@ export const siteConfig: SiteConfig = {
    aboutPage: {
      clubOfficers: [
        {
-         title: 'Treasurer',
-         name: 'Sid Sherman',
-         phone: '(206) 555-0101',
-         email: 'sid@anglelakemanor.com'
+         title: 'President',
+         name: 'Tani Rae Standridge',
+         phone: '(206) 300-5740',
+         email: 'tanirae@gmail.com',
+         image: '/src/assets/officers/tani_rae.jpg'
        },
        {
-         title: 'President & Beach Lot Manager',
-         name: 'Terri Sue Stockinger',
-         phone: '(206) 555-0102',
-         email: 'terri@anglelakemanor.com'
+         title: 'VP of Administration',
+         name: 'Dave Rankin',
+         phone: '(206) 261-1611',
+         email: 'drankin102@gmail.com',
+         image: '/src/assets/officers/dave_rankin.jpg'
        },
        {
-         title: 'VP Of Administration',
-         name: 'Rick Smith',
-         phone: '(206) 555-0103',
-         email: 'rick@anglelakemanor.com'
+         title: 'VP of Architectural Control Committee',
+         name: 'Pat Patterson',
+         phone: '',
+         email: '',
        },
        {
-         title: 'Secretary',
-         name: 'Jill Carlson',
-         phone: '(206) 555-0104',
-         email: 'jill@anglelakemanor.com'
+         title: 'Scribes',
+         name: 'Deb Anderson',
+         phone: '(206) 941-7760',
+         email: 'ulvi220@comcast.net',
+         image: '/src/assets/officers/deb_anderson.jpg'
        },
-       {
-         title: 'VP Of Architectural Control Committee',
-         name: 'Kyle Marshall',
-         phone: '(206) 555-0105',
-         email: 'kyle@anglelakemanor.com'
-       }
-     ],
+      {
+        title: 'Scribes',
+        name: 'Kathy Stewart',
+        phone: '(206) 878-1130',
+        email: 'tazs77@comcast.net',
+      },
+      {
+        title: 'Treasurer',
+        name: 'Bob Simmons',
+        phone: '(360) 747-3773',
+        email: 'almcc.treasurer@gmail.com',
+        image: '/src/assets/officers/bob_simmons.jpg'
+      },
+      {
+        title: 'Beach Lot Manager',
+        name: 'Tani Rae Standridge',
+        phone: '(206) 300-5740',
+        email: 'tanirae@gmail.com',
+        image: '/src/assets/officers/tani_rae.jpg'
+      },
+      {
+        title: 'Web Master',
+        name: 'Ricki Mudd',
+        phone: '(206) 229-8552',
+        email: 'rick.mudd@gmail.com',
+      }
+    ],
      covenants: [
        { value: 'snively-tracts', label: 'Covenants - Snively\'s Angle Lake Tracts', url: 'https://anglelakemanor.com/ALMNovember2010Covenants.pdf' },
        { value: 'petition-signatures', label: 'ALM Covenants - ALM Petition Signatures for Version', url: 'https://anglelakemanor.com/PetitionSignaturesRevisions.pdf' },
@@ -671,7 +721,8 @@ export const siteConfig: SiteConfig = {
        { text: 'Angle Lake Level - Multiyear Comparison on August 31, 2009', url: 'https://anglelakemanor.com/water-data/multiyear-comparison-2009' },
        { text: 'Water Level Comparison', url: 'https://anglelakemanor.com/water-data/water-level-comparison' },
        { text: 'Hydrogeologic Cross Section F-F\'', url: 'https://anglelakemanor.com/water-data/hydrogeologic-cross-section' },
-       { text: 'Potentiometric Surface of Aquifer Qua', url: 'https://anglelakemanor.com/water-data/potentiometric-surface' }
+       { text: 'Potentiometric Surface of Aquifer Qua', url: 'https://anglelakemanor.com/water-data/potentiometric-surface' },
+       { text: 'Washington Department of Fish & Wildlife', url: 'https://wdfw.wa.gov/' }
      ],
      fishingLinks: [
        { text: 'Washington Department of Fish & Wildlife', url: 'https://wdfw.wa.gov/' }

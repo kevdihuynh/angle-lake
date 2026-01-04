@@ -26,9 +26,19 @@
   border-radius: 8px 8px 0 0;
   margin: -1.5rem -1.5rem 1rem -1.5rem;
   text-align: center;
+  min-height: 150px;
 }
 
-/* Card Title */
+/* Card Title - in header (blue section) */
+.card-header .card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+}
+
+/* Card Title - fallback for photo cards */
 .card-title {
   margin: 0 0 1rem 0;
   font-size: 1.25rem;
@@ -48,21 +58,40 @@
 /* Event Card Specific */
 .event-card .card-datetime {
   font-weight: 600;
-  color: white;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
 }
 
 .event-card .card-location {
-  color: white;
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 /* Member Ad Card Specific */
 .ad-card .card-website {
   font-weight: 600;
-  color: white;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.ad-card .card-website-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ad-card .card-website-link:hover {
+  color: #2563eb;
 }
 
 .ad-card .card-phone {
-  color: white;
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 /* Photo/Video Card Specific */

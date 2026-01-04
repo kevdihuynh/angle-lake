@@ -36,24 +36,51 @@ const Card: React.FC<CardProps> = ({ data, variant = 'event', onClick }) => {
   const renderEventCard = () => (
     <div className="card event-card" onClick={handleClick}>
       <div className="card-header">
-        {data.datetime && <div className="card-datetime">{data.datetime}</div>}
-        {data.location && <div className="card-location">{data.location}</div>}
+        <h3 className="card-title">{data.title}</h3>
       </div>
-      <h3 className="card-title">{data.title}</h3>
+      {data.datetime && <div className="card-datetime">{data.datetime}</div>}
+      {data.location && <div className="card-location">{data.location}</div>}
       {data.description && <p className="card-description">{data.description}</p>}
     </div>
   )
 
-  const renderMemberAdCard = () => (
-    <div className="card ad-card" onClick={handleClick}>
-      <div className="card-header">
-        {data.website && <div className="card-website">Website: {data.website}</div>}
+  const renderMemberAdCard = () => {
+    const getWebsiteUrl = (website: string) => {
+      if (!website) return ''
+      if (website.startsWith('http://') || website.startsWith('https://')) {
+        return website
+      }
+      return `https://${website}`
+    }
+
+    const handleWebsiteClick = (e: React.MouseEvent) => {
+      e.stopPropagation() // Prevent card click handler from firing
+    }
+
+    return (
+      <div className="card ad-card" onClick={handleClick}>
+        <div className="card-header">
+          <h3 className="card-title">{data.title}</h3>
+        </div>
+        {data.website && (
+          <div className="card-website">
+            Website:{' '}
+            <a 
+              href={getWebsiteUrl(data.website)} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={handleWebsiteClick}
+              className="card-website-link"
+            >
+              {data.website}
+            </a>
+          </div>
+        )}
         {data.phone && <div className="card-phone">Call: {data.phone}</div>}
+        {data.description && <p className="card-description">{data.description}</p>}
       </div>
-      <h3 className="card-title">{data.title}</h3>
-      {data.description && <p className="card-description">{data.description}</p>}
-    </div>
-  )
+    )
+  }
 
   const renderPhotoVideoCard = () => (
     <div className="card photo-card" onClick={handleClick} style={{ cursor: 'pointer' }}>

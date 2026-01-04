@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
@@ -15,6 +15,7 @@ import './PDFPreview.css'
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set())
 
 
   const handleViewMoreEvents = () => {
@@ -158,15 +159,29 @@ const HomePage: React.FC = () => {
               <h2>CONTACT US</h2>
             </div>
             <div className="contact-grid">
-              {siteConfig.contactInfo.map((contact, index) => (
-                <div key={index} className="contact-card">
-                  <div className="contact-icon">👤</div>
-                  <h4>{contact.role}</h4>
-                  <p><strong>{contact.name}</strong></p>
-                  <p>Phone: {contact.phone}</p>
-                  <p>Email: {contact.email}</p>
-                </div>
-              ))}
+              {siteConfig.contactInfo.map((contact, index) => {
+                const imageFailed = imageErrors.has(index)
+                const showImage = contact.image && !imageFailed
+                
+                return (
+                  <div key={index} className="contact-card">
+                    {showImage ? (
+                      <img 
+                        src={contact.image} 
+                        alt={contact.name}
+                        className="contact-image"
+                        onError={() => setImageErrors(prev => new Set(prev).add(index))}
+                      />
+                    ) : (
+                      <div className="contact-icon">👤</div>
+                    )}
+                    <h4>{contact.role}</h4>
+                    <p><strong>{contact.name}</strong></p>
+                    <p>Phone: {contact.phone}</p>
+                    <p>Email: {contact.email}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </section>

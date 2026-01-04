@@ -15,7 +15,6 @@ const ResourcesPage: React.FC = () => {
   // Use configuration data
   const memberAds = siteConfig.resourcesPage.memberAds
   const waterDataLinks = siteConfig.resourcesPage.waterDataLinks
-  const fishingLinks = siteConfig.resourcesPage.fishingLinks
   const almInfo = siteConfig.resourcesPage.almInfo
   const alscInfo = siteConfig.resourcesPage.alscInfo
   const cityInfo = siteConfig.resourcesPage.cityInfo
@@ -86,7 +85,6 @@ const ResourcesPage: React.FC = () => {
               <h2>ANGLE LAKE INFORMATION & WATER DATA</h2>
             </div>
             <div className="subsection">
-              <h3>HYPERLINKS</h3>
               <ul className="links-list">
                 {waterDataLinks.map((link, index) => (
                   <li key={index}>
@@ -98,27 +96,9 @@ const ResourcesPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Fishing Guidelines Section */}
-        <section id="fishing-guidelines" className="fishing-guidelines-section section-white">
-          <div className="container">
-            <div className="section-header">
-              <h2>FISHING GUIDELINES</h2>
-            </div>
-            <div className="subsection">
-              <h3>HYPERLINKS</h3>
-              <ul className="links-list">
-                {fishingLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
 
         {/* ALM vs ALSC Section */}
-        <section id="alm-vs-alsc" className="alm-vs-alsc-section section-grey">
+        <section id="alm-vs-alsc" className="alm-vs-alsc-section section-white">
           <div className="container">
             <div className="section-header">
               <h2>ANGLE LAKE MANOR (ALM) VS ANGLE LAKE SHORE CLUB (ALSC)</h2>
@@ -141,11 +121,11 @@ const ResourcesPage: React.FC = () => {
                 <h3>{alscInfo.title}</h3>
                 <p>{alscInfo.description}</p>
                 <p>Our planned activities for the year include:</p>
-                <ol>
+                <ul>
                   {alscInfo.activities.map((activity, index) => (
                     <li key={index}>{activity}</li>
                   ))}
-                </ol>
+                </ul>
                 <p><em>{alscInfo.note}</em></p>
               </div>
             </div>
@@ -164,7 +144,7 @@ const ResourcesPage: React.FC = () => {
         </section>
 
         {/* City of SeaTac Section */}
-        <section id="city-seatac" className="city-section section-white">
+        <section id="city-seatac" className="city-section section-grey">
           <div className="container">
             <div className="section-header">
               <h2>CITY OF SEATAC</h2>

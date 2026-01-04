@@ -10,6 +10,7 @@ import './PDFPreview.css'
 
 const AboutPage: React.FC = () => {
   const [selectedCovenant, setSelectedCovenant] = useState('snively-tracts')
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set())
 
   // Use configuration data
   const covenantOptions: PDFOption[] = siteConfig.aboutPage.covenants
@@ -27,15 +28,29 @@ const AboutPage: React.FC = () => {
               <h2>CLUB OFFICERS</h2>
             </div>
             <div className="officers-grid">
-              {clubOfficers.map((officer, index) => (
-                <div key={index} className="officer-card">
-                  <div className="officer-icon">👤</div>
-                  <h4>{officer.title}</h4>
-                  <p className="officer-name">{officer.name}</p>
-                  <p className="officer-contact">{officer.phone}</p>
-                  <p className="officer-contact">{officer.email}</p>
-                </div>
-              ))}
+              {clubOfficers.map((officer, index) => {
+                const imageFailed = imageErrors.has(index)
+                const showImage = officer.image && !imageFailed
+                
+                return (
+                  <div key={index} className="officer-card">
+                    {showImage ? (
+                      <img 
+                        src={officer.image} 
+                        alt={officer.name}
+                        className="officer-image"
+                        onError={() => setImageErrors(prev => new Set(prev).add(index))}
+                      />
+                    ) : (
+                      <div className="officer-icon">👤</div>
+                    )}
+                    <h4>{officer.title}</h4>
+                    <p className="officer-name">{officer.name}</p>
+                    <p className="officer-contact">{officer.phone}</p>
+                    <p className="officer-contact">{officer.email}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -49,10 +64,10 @@ const AboutPage: React.FC = () => {
             
             <div className="legal-content">
               <div className="legal-subsection">
-                <h3>COVENANTS</h3>
+                <h3>ALM COVENANTS</h3>
                 
                 <PDFPreview
-                  title="ALM Covenants"
+                  title=""
                   selectedValue={selectedCovenant}
                   options={covenantOptions}
                   onSelectionChange={setSelectedCovenant}

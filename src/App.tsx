@@ -10,11 +10,15 @@ import LoginPage from './components/LoginPage'
 import AuthCallback from './components/AuthCallback'
 import AdminDashboard from './components/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import UnderConstruction from './components/UnderConstruction'
 import './styles/App.css'
 
 function App() {
   // Check if we're in development mode with auth bypass
   const skipAuth = import.meta.env.VITE_SKIP_AUTH === 'true'
+  
+  // Control whether payments page shows under construction
+  const underPaymentConstruction = true
 
   if (skipAuth) {
     return (
@@ -29,9 +33,13 @@ function App() {
               <Route 
                 path="/payments" 
                 element={
-                  <ProtectedRoute>
-                    <PaymentsPage />
-                  </ProtectedRoute>
+                  underPaymentConstruction ? (
+                    <UnderConstruction />
+                  ) : (
+                    <ProtectedRoute>
+                      <PaymentsPage />
+                    </ProtectedRoute>
+                  )
                 } 
               />
               <Route 
@@ -63,9 +71,13 @@ function App() {
             <Route 
               path="/payments" 
               element={
-                <ProtectedRoute>
-                  <PaymentsPage />
-                </ProtectedRoute>
+                underPaymentConstruction ? (
+                  <UnderConstruction />
+                ) : (
+                  <ProtectedRoute>
+                    <PaymentsPage />
+                  </ProtectedRoute>
+                )
               } 
             />
             <Route 
