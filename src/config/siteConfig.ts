@@ -339,84 +339,109 @@ export const siteConfig: SiteConfig = {
     {
       "value": "january-2024",
       "label": "January, 2024",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
+      "url": "/pdfs/newsletters/Jan24.pdf"
     },
     {
-      "value": "february-2021",
+      "value": "February-2021",
       "label": "February, 2021",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
+      "url": "/pdfs/newsletters/Feb21.pdf"
     },
     {
-      "value": "december-2019",
+      "value": "january-2020",
+      "label": "January, 2020",
+      "url": "/pdfs/newsletters/Jan20.pdf"
+    },
+    {
+      "value": "December-2019",
       "label": "December, 2019",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
+      "url": "/pdfs/newsletters/Dec19.pdf"
     },
     {
-      "value": "may-2017",
-      "label": "May 2017",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
-    }
+      "value": "June-2019",
+      "label": "June, 2019",
+      "url": "/pdfs/newsletters/June19.pdf"
+    },
+    {
+      "value": "February-2019",
+      "label": "February, 2019",
+      "url": "/pdfs/newsletters/Feb19.pdf"
+    },
+    {
+      "value": "May-2017",
+      "label": "May, 2017",
+      "url": "/pdfs/newsletters/May17.pdf"
+    },
+    {
+      "value": "February-2017",
+      "label": "February, 2017",
+      "url": "/pdfs/newsletters/Feb17.pdf"
+    },
   ],
   "meetingNotes": [
     {
+      "value": "september-2025",
+      "label": "September 2025 Meeting",
+      "url": "/pdfs/minutes/ALMSept2025.pdf"
+    },
+    {
       "value": "august-2025",
       "label": "August 2025 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
+      "url": "/pdfs/minutes/ALMAug2025.pdf"
     },
     {
       "value": "april-2025",
       "label": "April 2025 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMApr2025.pdf"
+      "url": "/pdfs/minutes/ALMApr2025.pdf"
     },
     {
       "value": "february-2025",
       "label": "February 2025 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMFeb2025.pdf"
+      "url": "/pdfs/minutes/ALMFeb2025.pdf"
     },
     {
       "value": "december-2024",
       "label": "December 2024 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMDec2024.pdf"
+      "url": "/pdfs/minutes/ALMDec2024.pdf"
     },
     {
       "value": "october-2024",
       "label": "October 2024 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMOct2024.pdf"
+      "url": "/pdfs/minutes/ALMOct2024.pdf"
     },
     {
       "value": "august-2024",
       "label": "August 2024 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2024.pdf"
+      "url": "/pdfs/minutes/ALMAug2024.pdf"
     },
     {
       "value": "june-2024",
       "label": "June 2024 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMJun2024.pdf"
+      "url": "/pdfs/minutes/ALMJun2024.pdf"
     },
     {
       "value": "february-2024",
       "label": "February 2024 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMFeb2024.pdf"
+      "url": "/pdfs/minutes/ALMFeb2024.pdf"
     },
     {
       "value": "december-2023",
       "label": "December 2023 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMDec2023.pdf"
+      "url": "/pdfs/minutes/ALMDec2023.pdf"
     },
     {
       "value": "october-2023",
       "label": "October 2023 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMOct2023.pdf"
+      "url": "/pdfs/minutes/ALMOct2023.pdf"
     },
     {
       "value": "august-2023",
       "label": "August 2023 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMAug2023.pdf"
+      "url": "/pdfs/minutes/ALMAug2023.pdf"
     },
     {
       "value": "june-2023",
       "label": "June 2023 Meeting",
-      "url": "https://anglelakemanor.com/Minutes/ALMJun2023.pdf"
+      "url": "/pdfs/minutes/ALMJun2023.pdf"
     },
     {
       "value": "april-2023",
@@ -566,10 +591,6 @@ export const siteConfig: SiteConfig = {
        "url": "https://anglelakemanor.com/2006%20Monthly%20Income%20and%20Expenses.pdf"
      }
    ],
-   "defaultMeetingNotes": {
-     "title": "ALM Meeting Minutes - August 2025",
-     "pdfUrl": "https://anglelakemanor.com/Minutes/ALMAug2025.pdf"
-   },
    
    // About Page Configuration
    aboutPage: {
@@ -635,7 +656,7 @@ export const siteConfig: SiteConfig = {
      ],
      bylaws: {
        title: 'ANGLE LAKE MANOR COMMUNITY CLUB BY-LAWS',
-       pdfUrl: 'https://anglelakemanor.com/bylaws.pdf'
+       pdfUrl: '/pdfs/bylaws.pdf'
      },
      beachRules: {
        postedRules: [
@@ -714,14 +735,14 @@ export const siteConfig: SiteConfig = {
        }
      ],
      waterDataLinks: [
-       { text: 'Angle Lake Current Water Statistics', url: 'https://anglelakemanor.com/water-data/current-statistics' },
-       { text: '2020 Angle Lake Water Quality Report', url: 'https://anglelakemanor.com/water-data/2020-water-quality-report' },
-       { text: '2016 Angle Lake Water Level Report', url: 'https://anglelakemanor.com/water-data/2016-water-level-report' },
-       { text: '2012 Angle Lake Water Quality Report', url: 'https://anglelakemanor.com/water-data/2012-water-quality-report' },
-       { text: 'Angle Lake Level - Multiyear Comparison on August 31, 2009', url: 'https://anglelakemanor.com/water-data/multiyear-comparison-2009' },
-       { text: 'Water Level Comparison', url: 'https://anglelakemanor.com/water-data/water-level-comparison' },
-       { text: 'Hydrogeologic Cross Section F-F\'', url: 'https://anglelakemanor.com/water-data/hydrogeologic-cross-section' },
-       { text: 'Potentiometric Surface of Aquifer Qua', url: 'https://anglelakemanor.com/water-data/potentiometric-surface' },
+       { text: 'Angle Lake Current Water Statistics', url: 'https://green2.kingcounty.gov/SmallLakes/LakePage.aspx?SiteID=4' },
+       { text: '2020 Angle Lake Water Quality Report', url: '/pdfs/2020WaterQualityReport.pdf' },
+       { text: '2016 Angle Lake Water Level Report', url: '/pdfs/Jan16WaterLevelReport.pdf' },
+       { text: '2012 Angle Lake Water Quality Report', url: '/pdfs/AngleLakeWaterQualityReport.pdf' },
+       { text: 'Angle Lake Level - Multiyear Comparison on August 31, 2009', url: '/pdfs/lakelevel.pdf' },
+       { text: 'Water Level Comparison', url: '/pdfs/Water Level Data.pdf' },
+       { text: 'Hydrogeologic Cross Section F-F', url: '/pdfs/Hydrogeologic Cross Section.pdf' },
+       { text: 'Potentiometric Surface of Aquifer Qua', url: '/pdfs/Hydrogeologic Cross Section.pdf' },
        { text: 'Washington Department of Fish & Wildlife', url: 'https://wdfw.wa.gov/' }
      ],
      fishingLinks: [
@@ -752,7 +773,7 @@ export const siteConfig: SiteConfig = {
          'Members Only Holiday Party'
        ],
        note: 'Note: Quoted costs may change.',
-       blogUrl: 'https://angleshoreclub.blogspot.com/'
+       blogUrl: 'https://anglelakesc.blogspot.com/'
      },
      cityInfo: {
        title: 'Welcome!',
@@ -879,7 +900,19 @@ export const siteConfig: SiteConfig = {
      { id: '26', title: '2023 ALSC Bunny Dock Hop', date: '2023', url: 'https://photos.app.goo.gl/aQbGx7WQ2eFeKmXC6', type: 'photo' },
      { id: '27', title: '2023 ALSC Fishing Derby', date: '2023', url: 'https://photos.app.goo.gl/g7xYKxPtCwUcvCLBA', type: 'photo' },
      { id: '28', title: '2023 ALM ALSC New Years Day Polar Plunge', date: 'January 1, 2023', url: 'https://photos.app.goo.gl/zEfZZmbXhUiWUzNS7', type: 'photo' }
-   ]
+   ],
+   
+   // Default Meeting Notes - placeholder, will be computed after object creation
+   defaultMeetingNotes: {
+     title: '',
+     pdfUrl: ''
+   }
+ }
+ 
+ // Compute defaultMeetingNotes from first item in meetingNotes array
+ siteConfig.defaultMeetingNotes = {
+   title: siteConfig.meetingNotes.length > 0 ? siteConfig.meetingNotes[0].label : '',
+   pdfUrl: siteConfig.meetingNotes.length > 0 ? siteConfig.meetingNotes[0].url : ''
  }
 
 // Helper function to get the current site configuration

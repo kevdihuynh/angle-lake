@@ -14,8 +14,16 @@ import './PDFPreview.css'
 
 
 const EventsMediaPage: React.FC = () => {
-  const [selectedNewsletter, setSelectedNewsletter] = useState('january-2024')
-  const [selectedMeetingNotes, setSelectedMeetingNotes] = useState('august-2025')
+  // Use configuration data for PDF options
+  const newsletterOptions: PDFOption[] = siteConfig.newsletters
+  const meetingNotesOptions: PDFOption[] = siteConfig.meetingNotes
+  
+  const [selectedNewsletter, setSelectedNewsletter] = useState(
+    newsletterOptions.length > 0 ? newsletterOptions[0].value : ''
+  )
+  const [selectedMeetingNotes, setSelectedMeetingNotes] = useState(
+    meetingNotesOptions.length > 0 ? meetingNotesOptions[0].value : ''
+  )
   const [showAllAlbums, setShowAllAlbums] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [showAllEvents, setShowAllEvents] = useState(false)
@@ -60,10 +68,6 @@ const EventsMediaPage: React.FC = () => {
     url: card.url,
     type: card.type as 'video' | 'photo'
   }))
-
-  // Use configuration data for PDF options
-  const newsletterOptions: PDFOption[] = siteConfig.newsletters
-  const meetingNotesOptions: PDFOption[] = siteConfig.meetingNotes
 
   return (
     <div className="App">

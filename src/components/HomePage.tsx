@@ -140,8 +140,8 @@ const HomePage: React.FC = () => {
               <h2>RECENT MEETING NOTES</h2>
             </div>
             <PDFPreview
-              title={siteConfig.defaultMeetingNotes.title}
-              pdfUrl={siteConfig.defaultMeetingNotes.pdfUrl}
+              title={siteConfig.meetingNotes.length > 0 ? siteConfig.meetingNotes[0].label : ''}
+              pdfUrl={siteConfig.meetingNotes.length > 0 ? siteConfig.meetingNotes[0].url : ''}
               downloadButtonText="VIEW MORE MEETING NOTES"
               showFallback={true}
               showDownloadButton={false}
