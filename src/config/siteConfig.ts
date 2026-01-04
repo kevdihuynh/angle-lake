@@ -286,14 +286,14 @@ export const siteConfig: SiteConfig = {
       name: 'Tani Rae Standridge',
       phone: '(206) 300-5740',
       email: 'tanirae@gmail.com',
-      image: '/src/assets/officers/tani_rae.jpg'
+      image: '/officers/tani_rae.jpg'
     },
     {
       role: 'VP of Administration',
       name: 'Dave Rankin',
       phone: '(206) 261-1611',
       email: 'drankin102@gmail.com',
-      image: '/src/assets/officers/dave_rankin.jpg'
+      image: '/officers/dave_rankin.jpg'
     },
     {
       role: 'VP of Architectural Control Committee',
@@ -306,7 +306,7 @@ export const siteConfig: SiteConfig = {
       name: 'Deb Anderson',
       phone: '(206) 941-7760',
       email: 'ulvi220@comcast.net',
-      image: '/src/assets/officers/deb_anderson.jpg'
+      image: '/officers/deb_anderson.jpg'
     },
    {
      role: 'Scribes',
@@ -319,7 +319,7 @@ export const siteConfig: SiteConfig = {
      name: 'Bob Simmons',
      phone: '(360) 747-3773',
      email: 'almcc.treasurer@gmail.com',
-     image: '/src/assets/officers/bob_simmons.jpg'
+     image: '/officers/bob_simmons.jpg'
    },
    {
      role: 'Beach Lot Manager',
@@ -579,14 +579,14 @@ export const siteConfig: SiteConfig = {
          name: 'Tani Rae Standridge',
          phone: '(206) 300-5740',
          email: 'tanirae@gmail.com',
-         image: '/src/assets/officers/tani_rae.jpg'
+         image: '/officers/tani_rae.jpg'
        },
        {
          title: 'VP of Administration',
          name: 'Dave Rankin',
          phone: '(206) 261-1611',
          email: 'drankin102@gmail.com',
-         image: '/src/assets/officers/dave_rankin.jpg'
+         image: '/officers/dave_rankin.jpg'
        },
        {
          title: 'VP of Architectural Control Committee',
@@ -599,7 +599,7 @@ export const siteConfig: SiteConfig = {
          name: 'Deb Anderson',
          phone: '(206) 941-7760',
          email: 'ulvi220@comcast.net',
-         image: '/src/assets/officers/deb_anderson.jpg'
+         image: '/officers/deb_anderson.jpg'
        },
       {
         title: 'Scribes',
@@ -612,14 +612,14 @@ export const siteConfig: SiteConfig = {
         name: 'Bob Simmons',
         phone: '(360) 747-3773',
         email: 'almcc.treasurer@gmail.com',
-        image: '/src/assets/officers/bob_simmons.jpg'
+        image: '/officers/bob_simmons.jpg'
       },
       {
         title: 'Beach Lot Manager',
         name: 'Tani Rae Standridge',
         phone: '(206) 300-5740',
         email: 'tanirae@gmail.com',
-        image: '/src/assets/officers/tani_rae.jpg'
+        image: '/officers/tani_rae.jpg'
       },
       {
         title: 'Web Master',
